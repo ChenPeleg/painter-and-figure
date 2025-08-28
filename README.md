@@ -1,2 +1,2 @@
-# painter-and-figure
-painter-and-figure Afik peleg's creation
+# vanilla-elements
+Web component custom elements vanilla
