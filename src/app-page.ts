@@ -4,8 +4,7 @@ import type {Subscription} from './models/Subscription.ts';
 
 
 class AppPage extends BaseElement {
-
-    private subscription: Subscription | null = null;
+    private subscription: Subscription ;
     private state = {
         currentPage: 0
     }
@@ -24,12 +23,26 @@ class AppPage extends BaseElement {
 
     }
 
+    calculatePages() {
+       return  {
+           nextPage:   +this.state.currentPage + 1,
+           prevPage:   +this.state.currentPage > 0 ? +this.state.currentPage - 1 : 0
+        }
+
+    }
+
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <main-page-layout>
+                    <nav class="mb-4 flex flex-row gap-4">
+                        <a id="nextpage" href="#/page/${this.calculatePages().nextPage}"> Next page </a>
+                        <a id="previouspage" href="#/page/${this.calculatePages().prevPage}"> Prev page </a>
+                    </nav>
+                 
                     Page: <span id="count-text">${this.state.currentPage}</span>
+                    <app-image></app-image>
 
                 </main-page-layout>
             </div>
@@ -38,7 +51,16 @@ class AppPage extends BaseElement {
     }
 
     update() {
-        this.$<HTMLSpanElement>('#count-text').innerText = this.state.currentPage.toString();
+        this.$<HTMLSpanElement>('#count-text').innerText = this.state.currentPage?.toString() || '0';
+        this.$<HTMLAnchorElement>('#nextpage').href = `#/page/${this.calculatePages().nextPage}`;
+        this.$<HTMLAnchorElement>('#previouspage').href = `#/page/${this.calculatePages().prevPage}`;
+
+
+    }
+    disconnectedCallback() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 }
 

@@ -7,3 +7,4 @@ import '../app-page.ts';
 import '../root.ts';
 import '../_core/router/router-outlet.ts';
 import '../layout/MainPageLayout.ts';
+import '../components/app-image.ts';
