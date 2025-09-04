@@ -29,6 +29,7 @@ class AppPage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <main-page-layout>
+                    Page: <span id="count-text">${this.state.currentPage}</span>
 
                 </main-page-layout>
             </div>
@@ -37,7 +38,7 @@ class AppPage extends BaseElement {
     }
 
     update() {
-        this.$<HTMLSpanElement>('#count-text').textContent = this.state.clicks.toString()
+        this.$<HTMLSpanElement>('#count-text').innerText = this.state.currentPage.toString();
     }
 }
 
