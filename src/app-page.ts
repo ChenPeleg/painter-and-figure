@@ -1,15 +1,26 @@
 import {BaseElement} from './_core/elements/base-element.ts';
-
-import vanillaLogo from './assets/images/vanilla-flower.png';
+import {HashRouterService} from './services/HashRouter.service.ts';
+import type {Subscription} from './models/Subscription.ts';
 
 
 class AppPage extends BaseElement {
+
+    private subscription: Subscription | null = null;
     private state = {
-        clicks: 0
+        currentPage: 0
     }
 
     connectedCallback() {
         super.connectedCallback();
+        this.subscription = this.servicesProvider.getService(HashRouterService).subscribe((routerState => {
+
+            if (routerState.params.page !== this.state.currentPage  ) {
+                this.state.currentPage = routerState.params.page;
+                this.update();
+            }
+
+
+        }))
 
     }
 
@@ -17,22 +28,9 @@ class AppPage extends BaseElement {
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
-                <div class="flex flex-col items-center justify-center gap-12 w-full h-full  lg:max-w-3/4 p-4">
-                    <img class="h-32" src="${vanillaLogo}" alt="Vanilla Logo">
-                    <h1 class="text-6xl font-bold text-gray-800 w-full text-center">
-                        Vanilla Elements
-                    </h1>
-                    Count is <span id="count-text"> 0 </span>
-                    <p>
-                        Using <a class="underline text-blue-500"
-                                 href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">Custom
-                        elements</a> and
-                        <a class="underline text-blue-500" href="https://tailwindcss.com/">TailWind</a>. <a class="underline text-blue-500"
-                                                                                                            href="https://vite.dev/">Vite</a>
-                        and
-                        <a class="underline text-blue-500" href="typecriptlang.org/">TypeScript</a> for development.
-                    </p>
-                </div>
+                <main-page-layout>
+
+                </main-page-layout>
             </div>
 
         `;

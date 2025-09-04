@@ -1,9 +1,11 @@
 import {globalStyleSheet} from '../tailwind-style-sheet.ts';
 import type {CustomElement} from './CustomElement.ts';
+import {_ServicesProvider} from '../../services/_ServicesProvider.ts';
 
 
 export class BaseElement extends HTMLElement implements CustomElement {
     protected internals: ElementInternals;
+    protected readonly servicesProvider = _ServicesProvider
 
     constructor() {
         super();
