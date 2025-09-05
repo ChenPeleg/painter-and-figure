@@ -2,14 +2,18 @@ import {BaseElement} from './_core/elements/base-element.ts';
 import {HashRouterService} from './services/HashRouter.service.ts';
 import type {Subscription} from './models/Subscription.ts';
 import {BookService} from './services/Book.service.ts';
+import {StoreService} from './services/Store.service.ts';
+import {AppLanguage} from './models/Language.ts';
 
 
 class AppPage extends BaseElement {
-    private subscription: Subscription | null = null;
+    private routersubscription: Subscription | null = null;
+    private storeSubscrition: Subscription | null = null;
     private state = {
         currentPage: 0,
         firstPage: 1,
-        lastPage: 14
+        lastPage: 14,
+        language: AppLanguage.Hebrew,
     }
 
     constructor() {
@@ -22,20 +26,26 @@ class AppPage extends BaseElement {
         } = bookService.getFirstAndLastPage()
         this.state.lastPage = last
         this.state.currentPage = first
-
-        this.state.currentPage =   this.servicesProvider.getService(HashRouterService).getState().params.page
+        this.state.currentPage = this.servicesProvider.getService(HashRouterService).getState().params.page
+        this.state.language = this.servicesProvider.getService(StoreService).store.getState()
     }
 
     connectedCallback() {
         super.connectedCallback();
         const router = this.servicesProvider.getService(HashRouterService);
-        this.subscription = router.subscribe((routerState => {
+        this.routersubscription = router.subscribe((routerState => {
             if (routerState.params.page !== this.state.currentPage) {
                 this.state.currentPage = routerState.params.page;
                 this.update();
             }
         }))
-
+        const storeService = this.servicesProvider.getService(StoreService);
+        this.storeSubscrition = storeService.store.subscribe((newState => {
+            if (newState.currentPage !== this.state.currentPage) {
+                this.state.currentPage = newState.currentPage;
+                this.update();
+            }
+        }))
 
 
     }
@@ -52,7 +62,7 @@ class AppPage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <main-page-layout>
-                 
+
                     <nav class="mb-4 flex flex-row gap-4 h-14 fixed top-0 shadow-2xl bg-amber-100 w-screen items-center z-20">
                         <a id="previouspage" href="#/page/${this.calculatePages().prevPage}">
                             <app-button>Previous page</app-button>
@@ -88,8 +98,8 @@ class AppPage extends BaseElement {
     }
 
     disconnectedCallback() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
+        if (this.routersubscription) {
+            this.routersubscription.unsubscribe();
         }
     }
 }

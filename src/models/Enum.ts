@@ -1,7 +1,10 @@
 export abstract class Enum {
-    protected value: string | number;
+    protected _value: string | number;
     constructor(value: string | number) {
-        this.value = value as any;
+        this._value = value  ;
+    }
+    get value(): string | number {
+        return this._value;
     }
 }
 

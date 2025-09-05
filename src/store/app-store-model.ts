@@ -1,5 +1,6 @@
 import {makeBrandedType} from '../models/makeBrandedType.ts';
-import type {AppLanguage} from '../models/Language.ts';
+import {AppLanguage} from '../models/Language.ts';
+
 
 export const DisplayType = makeBrandedType({
     Rows : 'Rows',
