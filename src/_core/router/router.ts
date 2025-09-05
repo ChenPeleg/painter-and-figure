@@ -106,7 +106,6 @@ export class Router {
     private findMatchingRoute(path: string): { route: RouteObject, params: any } | null {
 
 
-
         for (const [routePath, routeObj] of this.routes.entries()) {
             const params = this.matchRouteWithParams(routePath, path);
             if (params) {
@@ -121,7 +120,7 @@ export class Router {
                 route: this.routes.get(path)!,
                 params: {}
             };
-        } else if (this.routes.has('*')  ) {
+        } else if (this.routes.has('*')) {
             return {
                 route: this.routes.get('*')!,
                 params: {}
@@ -132,7 +131,9 @@ export class Router {
     }
 
     private matchRouteWithParams(routePath: string, path: string): any | null {
-
+        if (routePath.includes('*')) {
+            return null
+        }
         const paramNames: string[] = [];
         const regexPattern = routePath
             .replace(/:\w+/g, (match) => {

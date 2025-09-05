@@ -32,6 +32,9 @@ export class HashRouterService extends AbstractBaseService {
             return state;
         }
     }
+    navigate(path: string) {
+        this.router.navigate(path);
+    }
 
     getRouter(): Router {
         return this.router;
