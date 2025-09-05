@@ -36,7 +36,6 @@ class AppLanguageButton extends BaseElement {
 
 
     renderTemplate() {
-
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <div class="w-max flex flex-row gap-1   ">
