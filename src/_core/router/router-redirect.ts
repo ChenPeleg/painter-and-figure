@@ -13,6 +13,7 @@ export class RouterRedirect extends BaseElement {
         super.connectedCallback();
         const to = this.getAttribute('to');
         if (to) {
+
             window.location.hash = to;
         }
 

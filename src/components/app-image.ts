@@ -20,7 +20,12 @@ class AppImage extends BaseElement {
     }
 
     protected update() {
-       console.log(this.attributes.getNamedItem('image-number'));
+        const imageNumber = this.getAttribute('image-number') || '1';
+        const img = this.$<HTMLImageElement>('img');
+        if (img) {
+            img.src = this.getImageUrl(+imageNumber);
+            img.alt = `image${imageNumber}`;
+        }
     }
 
 }

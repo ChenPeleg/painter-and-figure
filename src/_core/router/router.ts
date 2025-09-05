@@ -81,6 +81,7 @@ export class Router {
 
         let match = this.findMatchingRoute(this.currentPath);
 
+
         if (match) {
 
             const {
@@ -104,6 +105,17 @@ export class Router {
 
     private findMatchingRoute(path: string): { route: RouteObject, params: any } | null {
 
+
+
+        for (const [routePath, routeObj] of this.routes.entries()) {
+            const params = this.matchRouteWithParams(routePath, path);
+            if (params) {
+                return {
+                    route: routeObj,
+                    params
+                };
+            }
+        }
         if (this.routes.has(path)) {
             return {
                 route: this.routes.get(path)!,
@@ -114,16 +126,6 @@ export class Router {
                 route: this.routes.get('*')!,
                 params: {}
             };
-        }
-
-        for (const [routePath, routeObj] of this.routes.entries()) {
-            const params = this.matchRouteWithParams(routePath, path);
-            if (params) {
-                return {
-                    route: routeObj,
-                    params
-                };
-            }
         }
 
         return null;
