@@ -4,7 +4,6 @@ import type {Subscription} from './models/Subscription.ts';
 import {BookService} from './services/Book.service.ts';
 import {StoreService} from './services/Store.service.ts';
 import {AppLanguage} from './models/Language.ts';
-import {TranslationService} from './services/Translation.service.ts';
 
 
 class AppPage extends BaseElement {
@@ -16,7 +15,6 @@ class AppPage extends BaseElement {
         lastPage: 14,
         language: AppLanguage.Hebrew,
     }
-    private t: TranslationService
 
     constructor() {
         super();
@@ -25,7 +23,6 @@ class AppPage extends BaseElement {
             first,
             last
         } = bookService.getFirstAndLastPage()
-        this.t = this.servicesProvider.getService(TranslationService)
         this.state.lastPage = last
         this.state.firstPage = first
         this.state.currentPage = first
@@ -56,10 +53,10 @@ class AppPage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <main-page-layout>
-                    <app-navigation 
-                        current-page="${this.state.currentPage}" 
-                        first-page="${this.state.firstPage}" 
-                        last-page="${this.state.lastPage}">
+                    <app-navigation
+                            current-page="${this.state.currentPage}"
+                            first-page="${this.state.firstPage}"
+                            last-page="${this.state.lastPage}">
                     </app-navigation>
 
                     <main class="relative z-0 flex flex-col justify-between h-screen overflow-hidden max-h-screen">
@@ -85,9 +82,9 @@ class AppPage extends BaseElement {
         // Update navigation attributes
         const navElement = this.$<HTMLElement>('app-navigation');
         if (navElement) {
-            navElement.setAttribute('current-page', this.state.currentPage?.toString() || '1');
-            navElement.setAttribute('first-page', this.state.firstPage?.toString() || '1');
-            navElement.setAttribute('last-page', this.state.lastPage?.toString() || '14');
+            navElement.setAttribute('current-page', this.state.currentPage?.toString());
+            navElement.setAttribute('first-page', this.state.firstPage?.toString());
+            navElement.setAttribute('last-page', this.state.lastPage?.toString());
         }
 
         this.$<HTMLElement>('app-image').setAttribute('page-number', this.state.currentPage?.toString() || '1');
