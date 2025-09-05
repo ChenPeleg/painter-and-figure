@@ -39,11 +39,17 @@ class AppLanguageButton extends BaseElement {
 
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="w-max">
+            <div class="w-max flex flex-row gap-1   ">
                 <span id="set-hebrew" role="button"
-                      class=" text-blue-700 cursor-pointer"  >${this.t.hebrew}</span>/
+                      class=" text-blue-700 cursor-pointer">
+                    <span class="hidden lg:flex">${this.t.hebrew}</span>
+                    <span class="flex lg:hidden">${this.t.hebrew.slice(0,2)}</span>
+                </span>/
                 <span id="set-english" role="button"
-                      class=" text-blue-700 cursor-pointer" >${this.t.english}</span>
+                      class=" text-blue-700 cursor-pointer flex flex-row" >
+                     <span class="hidden lg:flex">${this.t.english}</span>
+                     <span class="flex lg:hidden">${this.t.english.slice(0,2)}</span>
+                </span>
             </div>
         `;
     }

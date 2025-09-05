@@ -84,15 +84,17 @@ class AppPage extends BaseElement {
                         <div></div>
                     </nav>
 
-                    <main class="relative z-0">
+                    <main class="relative z-0 flex flex-col justify-between h-screen overflow-hidden max-h-screen">
                         <div class=" absolute lg:top-0 flex flex-col items-center w-full    ">
                             <div id="nav-bar-space" class="h-14 w-screen"></div>
-                            <div class="  flex flex-row  max-w-xl "> 
+                            <div class="  flex flex-row  max-w-xl ">
                                 <app-text page-number="${this.state.currentPage}"></app-text>
                             </div>
                         </div>
                         <div id="mobile-top-margins-for-image" class="w-full h-[40vh] lg:hidden "></div>
-                        <app-image page-number="${this.state.currentPage}"></app-image>
+                        <div class="mb-4">
+                            <app-image page-number="${this.state.currentPage}"></app-image>
+                        </div>
                     </main>
 
                 </main-page-layout>

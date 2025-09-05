@@ -8,21 +8,29 @@ class AppText extends BaseElement {
     }
 
     renderTemplate() {
+
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <div class=" flex flex-row justify-center w-full   ">
-                <p class="max-w-screen max-h-screen p-5 text-3xl   lg:text-3xl leading-11  ">
-                    ${this.getText()}
-                </p>
-            </div>
+                <div class="max-w-screen max-h-screen p-5 text-3xl h-screen  lg:text-3xl leading-11 overflow-y-scroll ">
+                    <p class="flex flex-col gap-6 min-h-fit">
+                        ${this.getText()}
+                        <span id="bottom-padding" class="h-32 w-10 "></span>
+                    </p>
+                    </p>
+                </div>
         `;
     }
 
     protected update() {
 
         const p = this.$<HTMLImageElement>('p');
-        if (p) {
-            p.innerText = this.getText();
+        const text = this.getText();
+        if (text.length < 100) {
+            p.innerText = text;
+
+        } else  {
+            this.renderTemplate()
         }
 
     }
