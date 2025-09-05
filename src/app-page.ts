@@ -4,17 +4,19 @@ import type {Subscription} from './models/Subscription.ts';
 import {BookService} from './services/Book.service.ts';
 import {StoreService} from './services/Store.service.ts';
 import {AppLanguage} from './models/Language.ts';
+import   {TranslationService} from './services/Translation.service.ts';
 
 
 class AppPage extends BaseElement {
-    private routersubscription: Subscription | null = null;
-    private storeSubscrition: Subscription | null = null;
+    private routerSubscription: Subscription | null = null;
+    private storeSubscription: (() => void) | null = null;
     private state = {
         currentPage: 0,
         firstPage: 1,
         lastPage: 14,
         language: AppLanguage.Hebrew,
     }
+    private t : TranslationService
 
     constructor() {
         super();
@@ -24,26 +26,26 @@ class AppPage extends BaseElement {
             last
 
         } = bookService.getFirstAndLastPage()
+        this.t = this.servicesProvider.getService(TranslationService)
         this.state.lastPage = last
         this.state.currentPage = first
         this.state.currentPage = this.servicesProvider.getService(HashRouterService).getState().params.page
-        this.state.language = this.servicesProvider.getService(StoreService).store.getState()
+        this.state.language = this.servicesProvider.getService(StoreService).store.getState().language || this.state.language
     }
 
     connectedCallback() {
         super.connectedCallback();
         const router = this.servicesProvider.getService(HashRouterService);
-        this.routersubscription = router.subscribe((routerState => {
+        this.routerSubscription = router.subscribe((routerState => {
             if (routerState.params.page !== this.state.currentPage) {
                 this.state.currentPage = routerState.params.page;
                 this.update();
             }
         }))
         const storeService = this.servicesProvider.getService(StoreService);
-        this.storeSubscrition = storeService.store.subscribe((newState => {
-            if (newState.currentPage !== this.state.currentPage) {
-                this.state.currentPage = newState.currentPage;
-                this.update();
+        this.storeSubscription = storeService.store.subscribe((newState => {
+            if (newState.language !== this.state.language) {
+                this.renderTemplate()
             }
         }))
 
@@ -65,10 +67,10 @@ class AppPage extends BaseElement {
 
                     <nav class="mb-4 flex flex-row gap-4 h-14 fixed top-0 shadow-2xl bg-amber-100 w-screen items-center z-20">
                         <a id="previouspage" href="#/page/${this.calculatePages().prevPage}">
-                            <app-button>Previous page</app-button>
+                            <app-button>${this.t.previousPage}</app-button>
                         </a>
                         <a id="nextpage" href="#/page/${this.calculatePages().nextPage}">
-                            <app-button>Next page</app-button>
+                            <app-button>${this.t.nextPage}/app-button>
                         </a>
                         Page: <span id="count-text">${this.state.currentPage}</span>
                     </nav>
@@ -98,8 +100,11 @@ class AppPage extends BaseElement {
     }
 
     disconnectedCallback() {
-        if (this.routersubscription) {
-            this.routersubscription.unsubscribe();
+        if (this.routerSubscription) {
+            this.routerSubscription.unsubscribe();
+        }
+        if (this.storeSubscription) {
+            this.storeSubscription();
         }
     }
 }
