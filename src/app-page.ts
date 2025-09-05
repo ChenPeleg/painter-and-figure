@@ -12,13 +12,10 @@ class AppPage extends BaseElement {
     connectedCallback() {
         super.connectedCallback();
         this.subscription = this.servicesProvider.getService(HashRouterService).subscribe((routerState => {
-
             if (routerState.params.page !== this.state.currentPage  ) {
                 this.state.currentPage = routerState.params.page;
                 this.update();
             }
-
-
         }))
 
     }
@@ -36,9 +33,9 @@ class AppPage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <main-page-layout>
-                    <nav class="mb-4 flex flex-row gap-4">
-                        <a id="nextpage" href="#/page/${this.calculatePages().nextPage}"> Next page </a>
-                        <a id="previouspage" href="#/page/${this.calculatePages().prevPage}"> Prev page </a>
+                    <nav class="mb-4 flex flex-row gap-4 h-14 fixed top-0 shadow-2xl bg-amber-100 w-screen items-center " >
+                        <a id="previouspage" href="#/page/${this.calculatePages().prevPage}">  <app-button>Previous page</app-button>   </a>
+                        <a id="nextpage" href="#/page/${this.calculatePages().nextPage}">  <app-button>Next page</app-button>   </a>
                     </nav>
                  
                     Page: <span id="count-text">${this.state.currentPage}</span>

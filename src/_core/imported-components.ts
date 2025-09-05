@@ -9,3 +9,4 @@ import '../_core/router/router-outlet.ts';
 import '../layout/MainPageLayout.ts';
 import '../components/app-image.ts';
 import '../_core/router/router-redirect.ts';
+import '../components/app-button.ts';
