@@ -47,6 +47,7 @@ export const bookContent: BookContent[] = [
         ],
     },
     {
+        pageNumber: 5,
         text: [
             `לפתע, הדמות מהציור יצאה — והצייר דיבר עם עצמו, עם הדמות.
 הצייר אמר: "שלום, מי אתה?"
@@ -58,6 +59,7 @@ export const bookContent: BookContent[] = [
         ],
     },
     {
+        pageNumber: 6,
         text: [
             `הדמות הלכה והגיעה לגן חיות מפחיד.
 שם היא פגשה אריה שרצה לטרוף אותה — ולא הצליח.
@@ -65,6 +67,7 @@ export const bookContent: BookContent[] = [
         ],
     },
     {
+        pageNumber: 7,
         text: [
             `הדמות ברחה לגן שעשועים, ושם היה לה כיף.
 היא שיחקה, והיה שם נקי — כמו בגן משחקים בכרמיאל, ולא כמו בגן משחקים בתל אביב.
@@ -73,6 +76,7 @@ export const bookContent: BookContent[] = [
         ],
     },
     {
+        pageNumber: 8,
         text: [
             `הצייר התגעגע לדמות. הוא רצה שהיא תחזור.
 הוא חיפש אותה, והלך לגן החיות המפחיד.
@@ -82,6 +86,7 @@ export const bookContent: BookContent[] = [
         ],
     },
     {
+        pageNumber : 9,
         text: [
             `הצייר הלך לחווה, שם ראה תרנגולת גדולה שרצתה לנשוך בו,
 כאילו שהוא האוכל שלה — אז הוא ברח שוב.
@@ -89,6 +94,7 @@ export const bookContent: BookContent[] = [
         ],
     },
     {
+        pageNumber: 10,
         text: [
             `הוא התקדם קדימה, ורק ראה חלק קטן של המגלשה.
 אבל לא היה לו כוח להגיע לשם, כי זה היה ממש רחוק.
@@ -98,6 +104,7 @@ export const bookContent: BookContent[] = [
         ],
     },
     {
+        pageNumber: 11,
         text: [
             `כשהגיעו — הוא הגיע לגן השעשועים.
 ושם מצא את הדמות.
@@ -108,6 +115,7 @@ export const bookContent: BookContent[] = [
         ],
     },
     {
+        pageNumber: 12,
         text: [
             `כשהגיעו, הם ירדו מהאוטו,
 וישבו שניהם מתחת לעץ.
@@ -119,6 +127,7 @@ export const bookContent: BookContent[] = [
         ],
     },
     {
+        pageNumber: 13,
         text: [
             `אפיק פלג בן חמש, אוהב מגדלים, אוריגמי, לכתוב ולקרוא, להתנדנד על החבל.
 

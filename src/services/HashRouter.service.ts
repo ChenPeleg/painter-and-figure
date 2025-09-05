@@ -8,6 +8,7 @@ export class HashRouterService extends AbstractBaseService {
     private subscribers: { cb: (newState: RouterState) => void, id: number }[];
     private subscriberId = 0;
 
+
     constructor(provider: ServicesResolver) {
         super(provider);
         this.router = new Router({
@@ -19,6 +20,7 @@ export class HashRouterService extends AbstractBaseService {
             this.setState(state);
             return state;
         }
+
     }
 
     updateRoutes(routes: RouteObject[]) {
@@ -39,6 +41,9 @@ export class HashRouterService extends AbstractBaseService {
 
     getRouter(): Router {
         return this.router;
+    }
+    getState(): RouterState {
+        return this.router.state;
     }
 
     subscribe(fn: (newState: RouterState) => void) {

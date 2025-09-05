@@ -8,9 +8,10 @@ class AppPage extends BaseElement {
     private subscription: Subscription | null = null;
     private state = {
         currentPage: 0,
-        firstPage : 1,
-        lastPage : 14
+        firstPage: 1,
+        lastPage: 14
     }
+
     constructor() {
         super();
         const bookService = this.servicesProvider.getService(BookService)
@@ -21,16 +22,21 @@ class AppPage extends BaseElement {
         } = bookService.getFirstAndLastPage()
         this.state.lastPage = last
         this.state.currentPage = first
+
+        this.state.currentPage =   this.servicesProvider.getService(HashRouterService).getState().params.page
     }
 
     connectedCallback() {
         super.connectedCallback();
-        this.subscription = this.servicesProvider.getService(HashRouterService).subscribe((routerState => {
+        const router = this.servicesProvider.getService(HashRouterService);
+        this.subscription = router.subscribe((routerState => {
             if (routerState.params.page !== this.state.currentPage) {
                 this.state.currentPage = routerState.params.page;
                 this.update();
             }
         }))
+
+
 
     }
 
@@ -53,12 +59,12 @@ class AppPage extends BaseElement {
                         <a id="nextpage" href="#/page/${this.calculatePages().nextPage}">
                             <app-button>Next page</app-button>
                         </a>
-                    Page: <span id="count-text">${this.state.currentPage}</span>
+                        Page: <span id="count-text">${this.state.currentPage}</span>
                     </nav>
 
                     <main class="relative z-0">
                         <div class="lg:absolute lg:top-0 bg-amber-400 w-full  h-44">
-                            <app-text page-number="${this.state.currentPage}"></app-text> 
+                            <app-text page-number="${this.state.currentPage}"></app-text>
                         </div>
                         <app-image page-number="${this.state.currentPage}"></app-image>
                     </main>
