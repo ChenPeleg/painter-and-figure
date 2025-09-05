@@ -39,7 +39,11 @@ class AppPage extends BaseElement {
                     </nav>
                  
                     Page: <span id="count-text">${this.state.currentPage}</span>
-                    <app-image image-number="${this.state.currentPage}"></app-image>
+                    <main>
+                        
+                    <app-text page-number="${this.state.currentPage}"></app-text>
+                    <app-image page-number="${this.state.currentPage}"></app-image>
+                    </main>
 
                 </main-page-layout>
             </div>
@@ -53,6 +57,7 @@ class AppPage extends BaseElement {
         this.$<HTMLAnchorElement>('#previouspage').href = `#/page/${this.calculatePages().prevPage}`;
 
         this.$<HTMLElement>('app-image').setAttribute('image-number', this.state.currentPage?.toString() || '0');
+        this.$<HTMLElement>('app-text').setAttribute('image-number', this.state.currentPage?.toString() || '0');
 
     }
     disconnectedCallback() {

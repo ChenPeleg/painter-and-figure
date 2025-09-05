@@ -3,7 +3,7 @@ import {BaseElement} from '../_core/elements/base-element.ts';
 
 class AppImage extends BaseElement {
     static get observedAttributes() {
-        return ['image-number'];
+        return ['page-number'];
     }
 
 
@@ -20,7 +20,7 @@ class AppImage extends BaseElement {
     }
 
     protected update() {
-        const imageNumber = this.getAttribute('image-number') || '1';
+        const imageNumber = this.getAttribute('page-number') || '1';
         const img = this.$<HTMLImageElement>('img');
         if (img) {
             img.src = this.getImageUrl(+imageNumber);
