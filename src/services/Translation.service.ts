@@ -44,6 +44,7 @@ export class TranslationService extends AbstractBaseService {
 
     changeLanguageTo(lang: AppLanguage) {
         const store = this.servicesResolver.getService(StoreService)
+
         if (store.store.getState().language === lang) {
             return
         }

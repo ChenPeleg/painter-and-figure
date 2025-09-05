@@ -44,8 +44,10 @@ class AppPage extends BaseElement {
         }))
         const storeService = this.servicesProvider.getService(StoreService);
         this.storeSubscription = storeService.store.subscribe((newState => {
+
             if (newState.language !== this.state.language) {
                 this.renderTemplate()
+                this.state.language = newState.language
             }
         }))
 
