@@ -11,7 +11,7 @@ class AppText extends BaseElement {
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <div class=" flex flex-row justify-center w-full  bg-red-400">
-                <p>
+                <p class="max-w-screen max-h-screen p-4 text-lg md:text-2xl lg:text-3xl">
                     ${this.getText()}
                 </p>
             </div>
@@ -29,6 +29,7 @@ class AppText extends BaseElement {
 
     private getText() {
         const pageNumber = this.getAttribute('page-number') || '1';
+        console.log(pageNumber);
         const bookService = this.servicesProvider.getService(BookService)
         return bookService.getPageContent(+pageNumber)
     }

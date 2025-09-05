@@ -64,7 +64,7 @@ class AppPage extends BaseElement {
                     </nav>
 
                     <main class="relative z-0">
-                        <div class="lg:absolute lg:top-0 bg-amber-400 w-full  h-44">
+                        <div class="lg:absolute lg:top-0   w-full  h-44">
                             <div id="nav-bar-space" class="h-14 w-screen"></div>
                             <app-text page-number="${this.state.currentPage}"></app-text>
                         </div>
@@ -82,8 +82,8 @@ class AppPage extends BaseElement {
         this.$<HTMLAnchorElement>('#nextpage').href = `#/page/${this.calculatePages().nextPage}`;
         this.$<HTMLAnchorElement>('#previouspage').href = `#/page/${this.calculatePages().prevPage}`;
 
-        this.$<HTMLElement>('app-image').setAttribute('page-number', this.state.currentPage?.toString() || '0');
-        this.$<HTMLElement>('app-text').setAttribute('pgae-number', this.state.currentPage?.toString() || '0');
+        this.$<HTMLElement>('app-image').setAttribute('page-number', this.state.currentPage?.toString() || '1');
+        this.$<HTMLElement>('app-text').setAttribute('page-number', this.state.currentPage?.toString() || '1');
 
     }
 
