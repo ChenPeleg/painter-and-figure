@@ -30,6 +30,9 @@ export class TranslationService extends AbstractBaseService {
     get previousPage () {
         return this.en ? 'Previous Page' : 'עמוד קודם'
     }
+    get page () {
+        return this.en ? 'Page' : 'עמוד'
+    }
 
 
 }

@@ -4,7 +4,7 @@ import type {Subscription} from './models/Subscription.ts';
 import {BookService} from './services/Book.service.ts';
 import {StoreService} from './services/Store.service.ts';
 import {AppLanguage} from './models/Language.ts';
-import   {TranslationService} from './services/Translation.service.ts';
+import {TranslationService} from './services/Translation.service.ts';
 
 
 class AppPage extends BaseElement {
@@ -16,7 +16,7 @@ class AppPage extends BaseElement {
         lastPage: 14,
         language: AppLanguage.Hebrew,
     }
-    private t : TranslationService
+    private t: TranslationService
 
     constructor() {
         super();
@@ -64,15 +64,16 @@ class AppPage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <main-page-layout>
-
-                    <nav class="mb-4 flex flex-row gap-4 h-14 fixed top-0 shadow-2xl bg-amber-100 w-screen items-center z-20">
-                        <a id="previouspage" href="#/page/${this.calculatePages().prevPage}">
-                            <app-button>${this.t.previousPage}</app-button>
-                        </a>
-                        <a id="nextpage" href="#/page/${this.calculatePages().nextPage}">
-                            <app-button>${this.t.nextPage}/app-button>
-                        </a>
-                        Page: <span id="count-text">${this.state.currentPage}</span>
+                    <nav class="mb-4 flex flex-row gap-4 h-14 fixed justify-center top-0 shadow-2xl bg-amber-100 w-screen items-center z-20 ">
+                        <div class="flex items-center flex-row gap-4  w-full max-w-lg justify-center ">
+                            <a id="previous-page" href="#/page/${this.calculatePages().prevPage}">
+                                <app-button>${this.t.previousPage}</app-button>
+                            </a>
+                            <a id="next-page" href="#/page/${this.calculatePages().nextPage}">
+                                <app-button>${this.t.nextPage}</app-button>
+                            </a>
+                            ${this.t.page} <span id="count-text">${this.state.currentPage}</span>
+                        </div>
                     </nav>
 
                     <main class="relative z-0">
@@ -91,8 +92,8 @@ class AppPage extends BaseElement {
 
     update() {
         this.$<HTMLSpanElement>('#count-text').innerText = this.state.currentPage?.toString() || '0';
-        this.$<HTMLAnchorElement>('#nextpage').href = `#/page/${this.calculatePages().nextPage}`;
-        this.$<HTMLAnchorElement>('#previouspage').href = `#/page/${this.calculatePages().prevPage}`;
+        this.$<HTMLAnchorElement>('#next-page').href = `#/page/${this.calculatePages().nextPage}`;
+        this.$<HTMLAnchorElement>('#previous-page').href = `#/page/${this.calculatePages().prevPage}`;
 
         this.$<HTMLElement>('app-image').setAttribute('page-number', this.state.currentPage?.toString() || '1');
         this.$<HTMLElement>('app-text').setAttribute('page-number', this.state.currentPage?.toString() || '1');
