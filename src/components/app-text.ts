@@ -12,33 +12,12 @@ class AppText extends BaseElement {
   background: transparent;
   background-image: linear-gradient(
     to right,
-    rgba(255, 225, 0, 0.1),
-    rgba(255, 225, 0, 0.7) 4%,
-    rgba(255, 225, 0, 0.3)
+    rgba(255, 255, 255, 0.6), 
+    rgba(255, 255, 255, 0.9)
   );
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }`
-    static bigTextShadow = `
-        text-shadow: 
-            0 0px 1px ${AppText.color},
-            0 2px 1px ${AppText.color},
-            2px 0px 1px ${AppText.color},
-            2px 2px 1px ${AppText.color}, 
-            0 0px 4px ${AppText.color},
-            0 2px 4px ${AppText.color},
-            2px 0px 4px ${AppText.color},
-            2px 2px 4px ${AppText.color}, 
-               0 0px 6px ${AppText.color},
-            0 2px 6px ${AppText.color},
-            2px 0px 6px ${AppText.color},
-            2px 2px 6px ${AppText.color}, 
-                  0 0px 6px ${AppText.color},
-            0 2px 6px ${AppText.color},
-            2px 0px 6px ${AppText.color},
-            2px 2px 6px ${AppText.color}, 
-            1px 1px 3px rgba(255, 255, 255, 1);
-    `;
 
     static get observedAttributes() {
         return ['page-number'];
@@ -74,7 +53,7 @@ class AppText extends BaseElement {
         }
         const text = this.getText();
         if (text.length < 100) {
-            spanText.innerText = text;
+            spanText.innerHTML = text;
 
         } else {
             this.renderTemplate()
@@ -86,7 +65,12 @@ class AppText extends BaseElement {
         const pageNumber = this.getAttribute('page-number') || '1';
         const bookService = this.servicesProvider.getService(BookService)
         const raw =  bookService.getPageContent(+pageNumber)
-        return raw.split('/n/n').map(t=>`<mark>${t}</mark>`).join('<br/><br/>')
+
+        if (!raw.includes('\n\n')) {
+
+            return raw
+        }
+        return raw.split('\n\n').map(t=>`<mark>${t}</mark>`).join('<br/><br/>')
     }
 
 }
