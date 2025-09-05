@@ -6,9 +6,10 @@ import {StoreService} from './Store.service.ts';
 import {ConfigurationService} from './Configuration.service.ts';
 import {PWAService} from './PWA.service.ts';
 import {HashRouterService} from './HashRouter.service.ts';
+import {BookService} from './Book.service.ts';
 
 const ServicesProviderFactory = () => {
-    const provider = new ServicesResolver([PWAService, ConfigurationService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HashRouterService]);
+    const provider = new ServicesResolver([PWAService, ConfigurationService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HashRouterService, BookService]);
     provider.initServices();
     return provider;
 }

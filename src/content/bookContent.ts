@@ -1,11 +1,11 @@
 
-export type RawText = {
+export type BookContent = {
     pageNumber?: number;
     text: string[];
     image?: string;
     customType?: any
 }
-export const rawText: RawText[] = [
+export const bookContent: BookContent[] = [
     {
         pageNumber: 0,
         text: [
