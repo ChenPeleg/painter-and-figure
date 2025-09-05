@@ -13,8 +13,8 @@ class AppImage extends BaseElement {
 
     renderTemplate() {
         this.shadowRoot!.innerHTML = `
-            <div class="h-screen w-screen overflow-hidden ">
-               <img class="" src="/src/assets/sketch/image1.png" alt="image1"/>
+            <div class=" flex flex-row justify-center w-full  ">
+               <img class="max-w-screen max-h-screen" src="/src/assets/sketch/image1.png" alt="image1"/>
             </div>
         `;
     }
