@@ -25,6 +25,7 @@ class AppText extends BaseElement {
     protected update() {
 
         const p = this.$<HTMLImageElement>('p');
+        if (!p) return;
         const text = this.getText();
         if (text.length < 100) {
             p.innerText = text;

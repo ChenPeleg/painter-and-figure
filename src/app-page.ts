@@ -24,10 +24,10 @@ class AppPage extends BaseElement {
         const {
             first,
             last
-
         } = bookService.getFirstAndLastPage()
         this.t = this.servicesProvider.getService(TranslationService)
         this.state.lastPage = last
+        this.state.firstPage = first
         this.state.currentPage = first
         this.state.currentPage = this.servicesProvider.getService(HashRouterService).getState().params.page
         this.state.language = this.servicesProvider.getService(StoreService).store.getState().language || this.state.language
@@ -44,21 +44,11 @@ class AppPage extends BaseElement {
         }))
         const storeService = this.servicesProvider.getService(StoreService);
         this.storeSubscription = storeService.store.subscribe((newState => {
-
             if (newState.language !== this.state.language) {
                 this.renderTemplate()
                 this.state.language = newState.language
             }
         }))
-
-
-    }
-
-    calculatePages() {
-        return {
-            nextPage: +this.state.currentPage + 1,
-            prevPage: +this.state.currentPage > 0 ? +this.state.currentPage - 1 : 0
-        }
     }
 
     renderTemplate() {
@@ -66,23 +56,11 @@ class AppPage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <main-page-layout>
-                    <nav class="mb-4 flex flex-row gap-4 h-14 fixed justify-between top-0 shadow-2xl bg-amber-100 w-screen items-center z-20 ">
-                        <div class=" flex flex-row h-full w-32 justify-center items-center">
-                            <div>
-                                <language-button></language-button>
-                            </div>
-                        </div>
-                        <div class="flex items-center flex-row gap-4  w-full max-w-lg justify-center ">
-                            <a id="previous-page" href="#/page/${this.calculatePages().prevPage}">
-                                <app-button>${this.t.previousPage}</app-button>
-                            </a>
-                            <a id="next-page" href="#/page/${this.calculatePages().nextPage}">
-                                <app-button>${this.t.nextPage}</app-button>
-                            </a>
-                            ${this.t.page} <span id="count-text">${this.state.currentPage}</span>
-                        </div>
-                        <div></div>
-                    </nav>
+                    <app-navigation 
+                        current-page="${this.state.currentPage}" 
+                        first-page="${this.state.firstPage}" 
+                        last-page="${this.state.lastPage}">
+                    </app-navigation>
 
                     <main class="relative z-0 flex flex-col justify-between h-screen overflow-hidden max-h-screen">
                         <div class=" absolute lg:top-0 flex flex-col items-center w-full    ">
@@ -104,13 +82,16 @@ class AppPage extends BaseElement {
     }
 
     update() {
-        this.$<HTMLSpanElement>('#count-text').innerText = this.state.currentPage?.toString() || '0';
-        this.$<HTMLAnchorElement>('#next-page').href = `#/page/${this.calculatePages().nextPage}`;
-        this.$<HTMLAnchorElement>('#previous-page').href = `#/page/${this.calculatePages().prevPage}`;
+        // Update navigation attributes
+        const navElement = this.$<HTMLElement>('app-navigation');
+        if (navElement) {
+            navElement.setAttribute('current-page', this.state.currentPage?.toString() || '1');
+            navElement.setAttribute('first-page', this.state.firstPage?.toString() || '1');
+            navElement.setAttribute('last-page', this.state.lastPage?.toString() || '14');
+        }
 
         this.$<HTMLElement>('app-image').setAttribute('page-number', this.state.currentPage?.toString() || '1');
         this.$<HTMLElement>('app-text').setAttribute('page-number', this.state.currentPage?.toString() || '1');
-
     }
 
     disconnectedCallback() {
@@ -124,6 +105,3 @@ class AppPage extends BaseElement {
 }
 
 customElements.define('app-page', AppPage);
-
-
-
