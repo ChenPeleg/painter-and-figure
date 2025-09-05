@@ -4,7 +4,7 @@ import type {Subscription} from './models/Subscription.ts';
 
 
 class AppPage extends BaseElement {
-    private subscription: Subscription | null = null ;
+    private subscription: Subscription | null = null;
     private state = {
         currentPage: 0
     }
@@ -12,7 +12,7 @@ class AppPage extends BaseElement {
     connectedCallback() {
         super.connectedCallback();
         this.subscription = this.servicesProvider.getService(HashRouterService).subscribe((routerState => {
-            if (routerState.params.page !== this.state.currentPage  ) {
+            if (routerState.params.page !== this.state.currentPage) {
                 this.state.currentPage = routerState.params.page;
                 this.update();
             }
@@ -21,9 +21,9 @@ class AppPage extends BaseElement {
     }
 
     calculatePages() {
-       return  {
-           nextPage:   +this.state.currentPage + 1,
-           prevPage:   +this.state.currentPage > 0 ? +this.state.currentPage - 1 : 0
+        return {
+            nextPage: +this.state.currentPage + 1,
+            prevPage: +this.state.currentPage > 0 ? +this.state.currentPage - 1 : 0
         }
 
     }
@@ -33,16 +33,21 @@ class AppPage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <main-page-layout>
-                    <nav class="mb-4 flex flex-row gap-4 h-14 fixed top-0 shadow-2xl bg-amber-100 w-screen items-center " >
-                        <a id="previouspage" href="#/page/${this.calculatePages().prevPage}">  <app-button>Previous page</app-button>   </a>
-                        <a id="nextpage" href="#/page/${this.calculatePages().nextPage}">  <app-button>Next page</app-button>   </a>
-                    </nav>
-                 
+                    <nav class="mb-4 flex flex-row gap-4 h-14 fixed top-0 shadow-2xl bg-amber-100 w-screen items-center z-20">
+                        <a id="previouspage" href="#/page/${this.calculatePages().prevPage}">
+                            <app-button>Previous page</app-button>
+                        </a>
+                        <a id="nextpage" href="#/page/${this.calculatePages().nextPage}">
+                            <app-button>Next page</app-button>
+                        </a>
                     Page: <span id="count-text">${this.state.currentPage}</span>
-                    <main>
-                        
-                    <app-text page-number="${this.state.currentPage}"></app-text>
-                    <app-image page-number="${this.state.currentPage}"></app-image>
+                    </nav>
+
+                    <main class="relative z-0">
+                        <article class="lg:absolute lg:top-0">
+                            <app-text page-number="${this.state.currentPage}"></app-text> 
+                        </article>
+                        <app-image page-number="${this.state.currentPage}"></app-image>
                     </main>
 
                 </main-page-layout>
@@ -60,6 +65,7 @@ class AppPage extends BaseElement {
         this.$<HTMLElement>('app-text').setAttribute('image-number', this.state.currentPage?.toString() || '0');
 
     }
+
     disconnectedCallback() {
         if (this.subscription) {
             this.subscription.unsubscribe();

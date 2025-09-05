@@ -8,12 +8,12 @@ class AppText extends BaseElement {
     }
 
     renderTemplate() {
-
+        // language=HTML
         this.shadowRoot!.innerHTML = `
             <div class=" flex flex-row justify-center w-full  bg-red-400">
-               <p>
-                ${this.getText()}
-</p>
+                <p>
+                    ${this.getText()}
+                </p>
             </div>
         `;
     }
@@ -22,12 +22,12 @@ class AppText extends BaseElement {
 
         const p = this.$<HTMLImageElement>('p');
         if (p) {
-            p.innerText = this.getText( );
+            p.innerText = this.getText();
         }
 
     }
 
-    private getText( ) {
+    private getText() {
         const pageNumber = this.getAttribute('page-number') || '1';
         const bookService = this.servicesProvider.getService(BookService)
         return bookService.getPageContent(+pageNumber)
