@@ -11,3 +11,4 @@ import '../components/app-image.ts';
 import '../_core/router/router-redirect.ts';
 import '../components/app-button.ts';
 import '../components/app-text.ts';
+import '../components/app-language-button.ts';
