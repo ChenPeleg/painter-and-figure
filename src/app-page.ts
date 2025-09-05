@@ -52,6 +52,7 @@ class AppPage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <main-page-layout>
+                 
                     <nav class="mb-4 flex flex-row gap-4 h-14 fixed top-0 shadow-2xl bg-amber-100 w-screen items-center z-20">
                         <a id="previouspage" href="#/page/${this.calculatePages().prevPage}">
                             <app-button>Previous page</app-button>
@@ -64,6 +65,7 @@ class AppPage extends BaseElement {
 
                     <main class="relative z-0">
                         <div class="lg:absolute lg:top-0 bg-amber-400 w-full  h-44">
+                            <div id="nav-bar-space" class="h-14 w-screen"></div>
                             <app-text page-number="${this.state.currentPage}"></app-text>
                         </div>
                         <app-image page-number="${this.state.currentPage}"></app-image>
