@@ -61,8 +61,8 @@ class AppPage extends BaseElement {
         this.$<HTMLAnchorElement>('#nextpage').href = `#/page/${this.calculatePages().nextPage}`;
         this.$<HTMLAnchorElement>('#previouspage').href = `#/page/${this.calculatePages().prevPage}`;
 
-        this.$<HTMLElement>('app-image').setAttribute('image-number', this.state.currentPage?.toString() || '0');
-        this.$<HTMLElement>('app-text').setAttribute('image-number', this.state.currentPage?.toString() || '0');
+        this.$<HTMLElement>('app-image').setAttribute('page-number', this.state.currentPage?.toString() || '0');
+        this.$<HTMLElement>('app-text').setAttribute('pgae-number', this.state.currentPage?.toString() || '0');
 
     }
 
