@@ -10,8 +10,8 @@ class AppText extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class=" flex flex-row justify-center w-full  bg-red-400">
-                <p class="max-w-screen max-h-screen p-4 text-lg md:text-2xl lg:text-3xl whitespace-pre">
+            <div class=" flex flex-row justify-center w-full   ">
+                <p class="max-w-screen max-h-screen p-5 text-3xl   lg:text-3xl leading-11  ">
                     ${this.getText()}
                 </p>
             </div>

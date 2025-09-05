@@ -18,11 +18,11 @@ export class TranslationService extends AbstractBaseService {
     }
 
     get nextPage() {
-        return this.en ? 'Next Page' : 'עמוד הבא'
+        return this.en ? 'Next' : 'עמוד הבא'
     }
 
     get previousPage() {
-        return this.en ? 'Previous Page' : 'עמוד קודם'
+        return this.en ? 'Previous' : 'עמוד קודם'
     }
 
     get page() {

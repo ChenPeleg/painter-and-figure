@@ -68,7 +68,9 @@ class AppPage extends BaseElement {
                 <main-page-layout>
                     <nav class="mb-4 flex flex-row gap-4 h-14 fixed justify-between top-0 shadow-2xl bg-amber-100 w-screen items-center z-20 ">
                         <div class=" flex flex-row h-full w-32 justify-center items-center">
-                            <div><language-button></language-button></div>
+                            <div>
+                                <language-button></language-button>
+                            </div>
                         </div>
                         <div class="flex items-center flex-row gap-4  w-full max-w-lg justify-center ">
                             <a id="previous-page" href="#/page/${this.calculatePages().prevPage}">
@@ -83,10 +85,13 @@ class AppPage extends BaseElement {
                     </nav>
 
                     <main class="relative z-0">
-                        <div class="lg:absolute lg:top-0   w-full  h-44">
+                        <div class=" absolute lg:top-0 flex flex-col items-center w-full    ">
                             <div id="nav-bar-space" class="h-14 w-screen"></div>
-                            <app-text page-number="${this.state.currentPage}"></app-text>
+                            <div class="  flex flex-row  max-w-xl "> 
+                                <app-text page-number="${this.state.currentPage}"></app-text>
+                            </div>
                         </div>
+                        <div id="mobile-top-margins-for-image" class="w-full h-[40vh] lg:hidden "></div>
                         <app-image page-number="${this.state.currentPage}"></app-image>
                     </main>
 
