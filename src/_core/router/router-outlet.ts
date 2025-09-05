@@ -5,7 +5,7 @@ import type {Subscription} from '../../models/Subscription.ts';
 
 
 export class RouterOutlet extends BaseElement {
-    private readonly servicesProvider = _ServicesProvider;
+    protected readonly servicesProvider = _ServicesProvider;
     private subscription: Subscription | null = null;
 
     connectedCallback(): void {

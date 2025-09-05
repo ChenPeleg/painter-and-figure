@@ -4,7 +4,7 @@ import type {Subscription} from './models/Subscription.ts';
 
 
 class AppPage extends BaseElement {
-    private subscription: Subscription ;
+    private subscription: Subscription | null = null ;
     private state = {
         currentPage: 0
     }
