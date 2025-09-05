@@ -1,8 +1,8 @@
-import {makeBrandedType} from './makeBrandedType.ts';
+import {Enum} from './Enum.ts';
 
-export const AppLanguage = makeBrandedType({
-    Hebrew: 'he',
-    English: 'en',
-}, 'language');
 
-export type AppLanguage = (typeof AppLanguage)[keyof typeof AppLanguage];
+export class AppLanguage extends Enum {
+    static Hebrew = new AppLanguage('Hebrew');
+    static English = new AppLanguage('English');
+}
+
