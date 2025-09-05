@@ -66,6 +66,7 @@ export class Router {
     public navigate(path: string): void {
         if (this.isHashRouter) {
             window.location.hash = path;
+            this.handleRouteChange();
         } else {
             window.history.pushState(null, '', path);
             this.handleRouteChange();

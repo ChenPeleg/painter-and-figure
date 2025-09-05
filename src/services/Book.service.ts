@@ -9,6 +9,14 @@ export class BookService extends AbstractBaseService {
         super(provider);
 
     }
+    getFirstAndLastPage(): { first: number, last: number } {
+        const pages = this.bookContent.map(p => p.pageNumber || 0).filter(p => p !== undefined).sort((a, b) => a - b);
+        return {
+            first: pages[0],
+            last: pages[pages.length - 1]
+        }
+
+    }
     getPageContent(page: number): string {
         const pageData = this.bookContent.find(p => p.pageNumber === page);
         if (pageData) {

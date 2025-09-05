@@ -1,12 +1,26 @@
 import {BaseElement} from './_core/elements/base-element.ts';
 import {HashRouterService} from './services/HashRouter.service.ts';
 import type {Subscription} from './models/Subscription.ts';
+import {BookService} from './services/Book.service.ts';
 
 
 class AppPage extends BaseElement {
     private subscription: Subscription | null = null;
     private state = {
-        currentPage: 0
+        currentPage: 0,
+        firstPage : 1,
+        lastPage : 14
+    }
+    constructor() {
+        super();
+        const bookService = this.servicesProvider.getService(BookService)
+        const {
+            first,
+            last
+
+        } = bookService.getFirstAndLastPage()
+        this.state.lastPage = last
+        this.state.currentPage = first
     }
 
     connectedCallback() {
@@ -25,7 +39,6 @@ class AppPage extends BaseElement {
             nextPage: +this.state.currentPage + 1,
             prevPage: +this.state.currentPage > 0 ? +this.state.currentPage - 1 : 0
         }
-
     }
 
     renderTemplate() {
@@ -44,9 +57,9 @@ class AppPage extends BaseElement {
                     </nav>
 
                     <main class="relative z-0">
-                        <article class="lg:absolute lg:top-0">
+                        <div class="lg:absolute lg:top-0 bg-amber-400 w-full  h-44">
                             <app-text page-number="${this.state.currentPage}"></app-text> 
-                        </article>
+                        </div>
                         <app-image page-number="${this.state.currentPage}"></app-image>
                     </main>
 

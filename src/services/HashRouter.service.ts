@@ -34,6 +34,7 @@ export class HashRouterService extends AbstractBaseService {
     }
     navigate(path: string) {
         this.router.navigate(path);
+
     }
 
     getRouter(): Router {
