@@ -53,8 +53,8 @@ class AppNavigation extends BaseElement {
         const pages = this.calculatePages();
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <nav class="mb-4 grid grid-cols-3 gap-4 h-14 fixed justify-between top-0 shadow-2xl bg-slate-200 w-screen items-center z-20 px-6">
-                <div class=" flex flex-row h-full justify-center items-center  ">
+            <nav class="mb-4 flex flex-row lg:grid lg:grid-cols-3 gap-4 h-14 fixed justify-between top-0 shadow-2xl bg-slate-200 w-screen items-center z-20 px-6">
+                <div class=" hidden lg:flex flex-row h-full justify-center items-center  ">
                     <app-banner></app-banner>
                 </div>
 
