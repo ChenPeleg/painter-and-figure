@@ -1,5 +1,6 @@
 import {BaseElement} from '../_core/elements/base-element.ts';
 import {TranslationService, Txt} from '../services/Translation.service.ts';
+import {AppStyles} from '../style/Styles.ts';
 
 
 class AppBanner extends BaseElement {
@@ -14,7 +15,7 @@ class AppBanner extends BaseElement {
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <a href="#/page/1"  >
-                <h1 class="  w-full    line-clamp-1  text-purple-950 font-bold text-2xl text-shadow-2xs   select-none">
+                <h1 class="  w-full    line-clamp-1  ${AppStyles.bannerText} font-bold text-2xl text-shadow-2xs   select-none">
                    <i-18 t="${Txt.headerTitle}"> ${this.t.headerTitle}</i-18>
                 </h1>
             </a>
