@@ -1,6 +1,7 @@
 import {BaseElement} from '../_core/elements/base-element.ts';
 import {TranslationService} from '../services/Translation.service.ts';
 import {AppLanguage} from '../models/Language.ts';
+import {AppStyles} from '../style/Styles.ts';
 
 
 class AppLanguageButton extends BaseElement {
@@ -44,12 +45,12 @@ class AppLanguageButton extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="w-max flex flex-row gap-1  ms-2 ">
                 <button id="set-hebrew"  
-                      class=" text-blue-700 cursor-pointer">
+                      class=" ${AppStyles.accentText}  cursor-pointer">
                     <span class="hidden lg:flex">${this.t.hebrew}</span>
                     <span class="flex lg:hidden">${this.t.hebrew.slice(0,2)}</span>
                 </button>/
                 <button id="set-english"  
-                      class=" text-blue-700 cursor-pointer flex flex-row" >
+                      class=" ${AppStyles.accentText}  cursor-pointer flex flex-row" >
                      <span class="hidden lg:flex">${this.t.english}</span>
                      <span class="flex lg:hidden">${this.t.english.slice(0,2)}</span>
                 </button>
