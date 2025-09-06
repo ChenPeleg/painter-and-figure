@@ -1,34 +1,51 @@
 import {BaseElement} from './_core/elements/base-element.ts';
 import {HashRouterService} from './services/HashRouter.service.ts';
 import type {Subscription} from './models/Subscription.ts';
+import {BookService} from './services/Book.service.ts';
+import {StoreService} from './services/Store.service.ts';
+import {AppLanguage} from './models/Language.ts';
 
 
 class AppPage extends BaseElement {
-    private subscription: Subscription | null = null ;
+    private routerSubscription: Subscription | null = null;
+    private storeSubscription: (() => void) | null = null;
     private state = {
-        currentPage: 0
+        currentPage: 0,
+        firstPage: 1,
+        lastPage: 14,
+        language: AppLanguage.Hebrew,
+    }
+
+    constructor() {
+        super();
+        const bookService = this.servicesProvider.getService(BookService)
+        const {
+            first,
+            last
+        } = bookService.getFirstAndLastPage()
+        this.state.lastPage = last
+        this.state.firstPage = first
+        this.state.currentPage = first
+        this.state.currentPage = this.servicesProvider.getService(HashRouterService).getState().params.page
+        this.state.language = this.servicesProvider.getService(StoreService).store.getState().language || this.state.language
     }
 
     connectedCallback() {
         super.connectedCallback();
-        this.subscription = this.servicesProvider.getService(HashRouterService).subscribe((routerState => {
-
-            if (routerState.params.page !== this.state.currentPage  ) {
+        const router = this.servicesProvider.getService(HashRouterService);
+        this.routerSubscription = router.subscribe((routerState => {
+            if (routerState.params.page !== this.state.currentPage) {
                 this.state.currentPage = routerState.params.page;
                 this.update();
             }
-
-
         }))
-
-    }
-
-    calculatePages() {
-       return  {
-           nextPage:   +this.state.currentPage + 1,
-           prevPage:   +this.state.currentPage > 0 ? +this.state.currentPage - 1 : 0
-        }
-
+        const storeService = this.servicesProvider.getService(StoreService);
+        this.storeSubscription = storeService.store.subscribe((newState => {
+            if (newState.language !== this.state.language) {
+                this.renderTemplate()
+                this.state.language = newState.language
+            }
+        }))
     }
 
     renderTemplate() {
@@ -36,13 +53,24 @@ class AppPage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <main-page-layout>
-                    <nav class="mb-4 flex flex-row gap-4">
-                        <a id="nextpage" href="#/page/${this.calculatePages().nextPage}"> Next page </a>
-                        <a id="previouspage" href="#/page/${this.calculatePages().prevPage}"> Prev page </a>
-                    </nav>
-                 
-                    Page: <span id="count-text">${this.state.currentPage}</span>
-                    <app-image image-number="${this.state.currentPage}"></app-image>
+                    <app-navigation
+                            current-page="${this.state.currentPage}"
+                            first-page="${this.state.firstPage}"
+                            last-page="${this.state.lastPage}">
+                    </app-navigation>
+
+                    <main class="relative z-0 flex flex-col justify-between h-screen overflow-hidden max-h-screen">
+                        <div class=" absolute lg:top-0 flex flex-col items-center w-full    ">
+                            <div id="nav-bar-space" class="h-14 w-screen"></div>
+                            <div class="  flex flex-row  max-w-xl ">
+                                <app-text page-number="${this.state.currentPage}"></app-text>
+                            </div>
+                        </div>
+                        <div id="mobile-top-margins-for-image" class="w-full h-[40vh] lg:hidden "></div>
+                        <div class="mb-4">
+                            <app-image page-number="${this.state.currentPage}"></app-image>
+                        </div>
+                    </main>
 
                 </main-page-layout>
             </div>
@@ -51,21 +79,26 @@ class AppPage extends BaseElement {
     }
 
     update() {
-        this.$<HTMLSpanElement>('#count-text').innerText = this.state.currentPage?.toString() || '0';
-        this.$<HTMLAnchorElement>('#nextpage').href = `#/page/${this.calculatePages().nextPage}`;
-        this.$<HTMLAnchorElement>('#previouspage').href = `#/page/${this.calculatePages().prevPage}`;
+        // Update navigation attributes
+        const navElement = this.$<HTMLElement>('app-navigation');
+        if (navElement) {
+            navElement.setAttribute('current-page', this.state.currentPage?.toString());
+            navElement.setAttribute('first-page', this.state.firstPage?.toString());
+            navElement.setAttribute('last-page', this.state.lastPage?.toString());
+        }
 
-        this.$<HTMLElement>('app-image').setAttribute('image-number', this.state.currentPage?.toString() || '0');
-
+        this.$<HTMLElement>('app-image').setAttribute('page-number', this.state.currentPage?.toString() || '1');
+        this.$<HTMLElement>('app-text').setAttribute('page-number', this.state.currentPage?.toString() || '1');
     }
+
     disconnectedCallback() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
+        if (this.routerSubscription) {
+            this.routerSubscription.unsubscribe();
+        }
+        if (this.storeSubscription) {
+            this.storeSubscription();
         }
     }
 }
 
 customElements.define('app-page', AppPage);
-
-
-

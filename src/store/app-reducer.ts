@@ -23,9 +23,11 @@ export const appReducer: StoreReducer<AppStoreModel, AppAction> = (state: AppSto
                 ...state,
                 count: 0
             };
-
-
-
+        case AppActionType.setLanguage:
+            return {
+                ...state,
+                language: action.payload
+            }
         default:
             return state;
     }

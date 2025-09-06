@@ -66,6 +66,7 @@ export class Router {
     public navigate(path: string): void {
         if (this.isHashRouter) {
             window.location.hash = path;
+            this.handleRouteChange();
         } else {
             window.history.pushState(null, '', path);
             this.handleRouteChange();
@@ -80,6 +81,7 @@ export class Router {
         this.currentPath = this.isHashRouter ? window.location.hash.slice(1) || '/' : window.location.pathname || '/';
 
         let match = this.findMatchingRoute(this.currentPath);
+
 
         if (match) {
 
@@ -104,17 +106,6 @@ export class Router {
 
     private findMatchingRoute(path: string): { route: RouteObject, params: any } | null {
 
-        if (this.routes.has(path)) {
-            return {
-                route: this.routes.get(path)!,
-                params: {}
-            };
-        } else if (this.routes.has('*')  ) {
-            return {
-                route: this.routes.get('*')!,
-                params: {}
-            };
-        }
 
         for (const [routePath, routeObj] of this.routes.entries()) {
             const params = this.matchRouteWithParams(routePath, path);
@@ -125,12 +116,25 @@ export class Router {
                 };
             }
         }
+        if (this.routes.has(path)) {
+            return {
+                route: this.routes.get(path)!,
+                params: {}
+            };
+        } else if (this.routes.has('*')) {
+            return {
+                route: this.routes.get('*')!,
+                params: {}
+            };
+        }
 
         return null;
     }
 
     private matchRouteWithParams(routePath: string, path: string): any | null {
-
+        if (routePath.includes('*')) {
+            return null
+        }
         const paramNames: string[] = [];
         const regexPattern = routePath
             .replace(/:\w+/g, (match) => {
