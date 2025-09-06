@@ -54,6 +54,9 @@ export class TranslationService extends AbstractBaseService {
         })
 
     }
+   get headerTitle() {
+        return this.en ? 'Painter And Figure - By Afik Peleg' : 'הצייר והדמות - מאת אפיק פלג'
+    }
 
 
 }
