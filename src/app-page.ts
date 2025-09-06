@@ -42,8 +42,8 @@ class AppPage extends BaseElement {
         const storeService = this.servicesProvider.getService(StoreService);
         this.storeSubscription = storeService.store.subscribe((newState => {
             if (newState.language !== this.state.language) {
-                this.renderTemplate()
-                this.state.language = newState.language
+                // this.renderTemplate()
+                // this.state.language = newState.language
             }
         }))
     }
@@ -61,7 +61,7 @@ class AppPage extends BaseElement {
 
                     <main class="relative z-0 flex flex-col justify-between h-screen overflow-hidden max-h-screen">
                         <div class=" absolute lg:top-0 flex flex-col items-center w-full    ">
-                            <div id="nav-bar-space" class="h-14 w-screen"></div>
+                            <div id="nav-bar-space" class="lg:h-14 h-24 w-screen"></div>
                             <div class="  flex flex-row  max-w-xl ">
                                 <app-text page-number="${this.state.currentPage}"></app-text>
                             </div>

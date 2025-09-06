@@ -13,3 +13,5 @@ import '../components/app-button.ts';
 import '../components/app-text.ts';
 import '../components/app-language-button.ts';
 import '../components/app-navigation.ts';
+import '../components/app-banner.ts';
+import '../components/i-18.ts';

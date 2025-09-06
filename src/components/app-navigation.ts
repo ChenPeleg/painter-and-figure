@@ -1,5 +1,5 @@
 import {BaseElement} from '../_core/elements/base-element.ts';
-import {TranslationService} from '../services/Translation.service.ts';
+import {TranslationService, Txt} from '../services/Translation.service.ts';
 
 class AppNavigation extends BaseElement {
 
@@ -53,32 +53,44 @@ class AppNavigation extends BaseElement {
         const pages = this.calculatePages();
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <nav class="mb-4 flex flex-row gap-4 h-14 fixed justify-between top-0 shadow-2xl bg-amber-100 w-screen items-center z-20 ">
-                <div class=" flex flex-row h-full lg:w-32 justify-center items-center">
-                    <div>
-                        <language-button></language-button>
+            <nav class="mb-4 flex flex-col  lg:grid lg:grid-cols-3 gap-2 lg:h-14 h-24 fixed  top-0 shadow-2xl bg-slate-200 w-screen items-center z-20 px-2 lg:px-6">
+
+
+                <div class="  flex flex-row lg:h-full h-10 justify-center items-center  ">
+                    <app-banner></app-banner>
+                </div>
+                <div class="lg:contents flex flex-row gap-3">
+
+
+                    <div class="flex items-center flex-row gap-4  w-full max-w-lg justify-center ">
+                        <a id="previous-page"
+                           href="${pages.isFirstPage ? '#' : `#/page/${pages.prevPage}`}"
+                           class="${pages.isFirstPage ? 'pointer-events-none opacity-50' : ''}">
+                            <app-button ${pages.isFirstPage ? 'disabled' : ''}>
+                                <i-18 t="${Txt.previousPage}">${this.t.previousPage}</i-18>
+                            </app-button>
+                        </a>
+                        <a id="next-page"
+                           href="${pages.isLastPage ? '#' : `#/page/${pages.nextPage}`}"
+                           class="${pages.isLastPage ? 'pointer-events-none opacity-50' : ''}">
+                            <app-button ${pages.isLastPage ? 'disabled' : ''}>
+                                <i-18 t="${Txt.nextPage}">${this.t.nextPage}</i-18>
+                            </app-button>
+                        </a>
+                        <span id="count-text">${this.currentPage}/${this.lastPage}</span>
+                    </div>
+                    <div class=" flex flex-row h-full justify-end items-center  ">
+                        <div>
+                            <language-button></language-button>
+                        </div>
                     </div>
                 </div>
-                <div class="flex items-center flex-row gap-4  w-full max-w-lg justify-center ">
-                    <a id="previous-page" 
-                       href="${pages.isFirstPage ? '#' : `#/page/${pages.prevPage}`}"
-                       class="${pages.isFirstPage ? 'pointer-events-none opacity-50' : ''}">
-                        <app-button ${pages.isFirstPage ? 'disabled' : ''}>${this.t.previousPage}</app-button>
-                    </a>
-                    <a id="next-page" 
-                       href="${pages.isLastPage ? '#' : `#/page/${pages.nextPage}`}"
-                       class="${pages.isLastPage ? 'pointer-events-none opacity-50' : ''}">
-                        <app-button ${pages.isLastPage ? 'disabled' : ''}>${this.t.nextPage}</app-button>
-                    </a>
-                    <span id="count-text">${this.currentPage}/${this.lastPage}</span>
-                </div>
-                <div></div>
             </nav>
         `;
     }
 
     update() {
-        if (!this.shadowRoot || !this.$<HTMLSpanElement>('#count-text') ) {
+        if (!this.shadowRoot || !this.$<HTMLSpanElement>('#count-text')) {
             return;
         }
 

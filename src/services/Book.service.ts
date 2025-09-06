@@ -1,6 +1,8 @@
 import {ServicesResolver} from '../_global/provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from '../_global/provider/AbstractBaseService.ts';
 import {bookContent} from '../content/bookContent.ts';
+import {StoreService} from './Store.service.ts';
+import {AppLanguage} from '../models/Language.ts';
 
 export class BookService extends AbstractBaseService {
    private bookContent = bookContent
@@ -18,9 +20,11 @@ export class BookService extends AbstractBaseService {
 
     }
     getPageContent(page: number): string {
+       const lang = this.servicesResolver.getService(StoreService).store.getState().language;
+
         const pageData = this.bookContent.find(p => p.pageNumber === page);
         if (pageData) {
-            return pageData.text.join('\n\n');
+            return (lang === AppLanguage.English ?  pageData.englishText : pageData.hebrewText).join('\n\n');
         }
         throw `No content for page ${page}`;
     }
