@@ -5,6 +5,12 @@ import type {Subscription} from '../models/Subscription.ts';
 
 class I18 extends BaseElement {
     subscription: Subscription | undefined = undefined;
+    private t: TranslationService
+
+    constructor() {
+        super();
+        this.t = this.servicesProvider.getService(TranslationService)
+    }
 
     get observedAttributes() {
         return ['t'];
@@ -12,11 +18,10 @@ class I18 extends BaseElement {
 
     connectedCallback() {
         super.connectedCallback();
-        const translationService = this.servicesProvider.getService(TranslationService);
-        this.subscription = translationService.subscribe((_state) => {
-            this.updateText();
+        this.subscription = this.t.subscribe((_state) => {
+            this.update();
         })
-
+        this.update()
     }
 
     disconnectedCallback() {
@@ -28,11 +33,11 @@ class I18 extends BaseElement {
 
     renderTemplate() {
         this.shadowRoot!.innerHTML = `<span id="translated-text">
-             <slot></slot>
+<!--             <slot></slot>-->
             </span>`;
     }
 
-    private updateText() {
+      update() {
         const key = this.getAttribute('t');
         if (!key) {
             return;
