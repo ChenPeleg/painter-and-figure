@@ -5,7 +5,7 @@ class MainPageLayout extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="h-screen w-screen overflow-hidden ">
+            <div class="h-dvh w-screen overflow-hidden ">
                 <slot>
             </div>
         `;

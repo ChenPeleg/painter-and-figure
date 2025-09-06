@@ -59,7 +59,7 @@ class AppPage extends BaseElement {
                             last-page="${this.state.lastPage}">
                     </app-navigation>
 
-                    <main class="relative z-0 flex flex-col justify-between h-screen overflow-hidden max-h-screen">
+                    <main class="relative z-0 flex flex-col justify-between h-dvh overflow-hidden max-h-dvh">
                         <div class=" absolute lg:top-0 flex flex-col items-center w-full    ">
                             <div id="nav-bar-space" class="lg:h-14 h-24 w-screen"></div>
                             <div class="  flex flex-row  max-w-xl ">
