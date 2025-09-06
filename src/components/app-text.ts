@@ -46,7 +46,6 @@ class AppText extends BaseElement {
     }
 
     protected update() {
-
         const spanText = this.$<HTMLSpanElement>('#text');
         if (!spanText) {
             return;
