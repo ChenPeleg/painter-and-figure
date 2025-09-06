@@ -1,5 +1,5 @@
 import {BaseElement} from '../_core/elements/base-element.ts';
-import {TranslationService} from '../services/Translation.service.ts';
+import {TranslationService, Txt} from '../services/Translation.service.ts';
 
 class AppNavigation extends BaseElement {
 
@@ -54,20 +54,24 @@ class AppNavigation extends BaseElement {
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <nav class="mb-4 grid grid-cols-3 gap-4 h-14 fixed justify-between top-0 shadow-2xl bg-slate-200 w-screen items-center z-20 px-6">
-                <div class=" flex flex-row h-full justify-center items-center  "> 
-                        <app-banner></app-banner> 
-                </div> 
-              
+                <div class=" flex flex-row h-full justify-center items-center  ">
+                    <app-banner></app-banner>
+                </div>
+
                 <div class="flex items-center flex-row gap-4  w-full max-w-lg justify-center ">
-                    <a id="previous-page" 
+                    <a id="previous-page"
                        href="${pages.isFirstPage ? '#' : `#/page/${pages.prevPage}`}"
                        class="${pages.isFirstPage ? 'pointer-events-none opacity-50' : ''}">
-                        <app-button ${pages.isFirstPage ? 'disabled' : ''}>${this.t.previousPage}</app-button>
+                        <app-button ${pages.isFirstPage ? 'disabled' : ''}>
+                            <i-18 t="${Txt.previousPage}">${this.t.previousPage}</i-18>
+                        </app-button>
                     </a>
-                    <a id="next-page" 
+                    <a id="next-page"
                        href="${pages.isLastPage ? '#' : `#/page/${pages.nextPage}`}"
                        class="${pages.isLastPage ? 'pointer-events-none opacity-50' : ''}">
-                        <app-button ${pages.isLastPage ? 'disabled' : ''}>${this.t.nextPage}</app-button>
+                        <app-button ${pages.isLastPage ? 'disabled' : ''}>
+                            <i-18 t="${Txt.nextPage}">${this.t.nextPage}</i-18>
+                        </app-button>
                     </a>
                     <span id="count-text">${this.currentPage}/${this.lastPage}</span>
                 </div>
@@ -81,7 +85,7 @@ class AppNavigation extends BaseElement {
     }
 
     update() {
-        if (!this.shadowRoot || !this.$<HTMLSpanElement>('#count-text') ) {
+        if (!this.shadowRoot || !this.$<HTMLSpanElement>('#count-text')) {
             return;
         }
 

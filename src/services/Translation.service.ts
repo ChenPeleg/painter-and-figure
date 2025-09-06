@@ -5,8 +5,16 @@ import {StoreService} from './Store.service.ts';
 import {AppActionType} from '../store/app-action-type.ts';
 
 
-export class TranslationService extends AbstractBaseService {
+export class Txt {
+    static nextPage = 'nextPage'
+    static previousPage = 'previousPage'
+    static page = 'page'
+    static hebrew = 'hebrew'
+    static english = 'english'
+    static headerTitle = 'headerTitle'
+}
 
+export class TranslationService extends AbstractBaseService {
 
     constructor(provider: ServicesResolver) {
         super(provider);
