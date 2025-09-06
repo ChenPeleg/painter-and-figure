@@ -1,20 +1,20 @@
 import {ServicesResolver} from '../_global/provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from '../_global/provider/AbstractBaseService.ts';
 
-import image1 from '../assets/sketch/image1.png';
-import image2 from '../assets/sketch/image2.png';
-import image3 from '../assets/sketch/image3.png';
-import image4 from '../assets/sketch/image4.png';
-import image5 from '../assets/sketch/image5.png';
-import image6 from '../assets/sketch/image6.png';
-import image7 from '../assets/sketch/image7.png';
-import image8 from '../assets/sketch/image8.png';
-import image9 from '../assets/sketch/image9.png';
-import image10 from '../assets/sketch/image10.png';
-import image11 from '../assets/sketch/image11.png';
-import image12 from '../assets/sketch/image12.png';
-import image13 from '../assets/sketch/image13.png';
-import image14 from '../assets/sketch/image14.png';
+import image1 from '../assets/sketch/image1.jpeg';
+import image2 from '../assets/sketch/image2.jpeg';
+import image3 from '../assets/sketch/image3.jpeg';
+import image4 from '../assets/sketch/image4.jpeg';
+import image5 from '../assets/sketch/image5.jpeg';
+import image6 from '../assets/sketch/image6.jpeg';
+import image7 from '../assets/sketch/image7.jpeg';
+import image8 from '../assets/sketch/image8.jpeg';
+import image9 from '../assets/sketch/image9.jpeg';
+import image10 from '../assets/sketch/image10.jpeg';
+import image11 from '../assets/sketch/image11.jpeg';
+import image12 from '../assets/sketch/image12.jpeg';
+import image13 from '../assets/sketch/image13.jpeg';
+import image14 from '../assets/sketch/image14.jpeg';
 
 export class ImageService extends AbstractBaseService {
     static allImages: Record<number, string> = {
