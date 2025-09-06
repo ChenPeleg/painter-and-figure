@@ -18,11 +18,9 @@ class AppLanguageButton extends BaseElement {
         const englishButton = this.$<HTMLSpanElement>('#set-english');
 
         hebrewButton?.addEventListener('click', () => {
-
             this.t.changeLanguageTo(AppLanguage.Hebrew)
         })
         englishButton?.addEventListener('click', () => {
-
             this.t.changeLanguageTo(AppLanguage.English)
         })
 
@@ -30,6 +28,13 @@ class AppLanguageButton extends BaseElement {
 
         hebrewButton?.classList.toggle('underline', !isEn)
         englishButton?.classList.toggle('underline', isEn)
+
+        this.t.subscribe((_tate) => {
+            const isEn = this.t.appLanguages === AppLanguage.English
+            hebrewButton?.classList.toggle('underline', !isEn)
+            englishButton?.classList.toggle('underline', isEn)
+        })
+
     }
 
 
