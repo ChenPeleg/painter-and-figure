@@ -53,7 +53,7 @@ class AppNavigation extends BaseElement {
         const pages = this.calculatePages();
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <nav class="mb-4 flex flex-row gap-4 h-14 fixed justify-between top-0 shadow-2xl bg-amber-100 w-screen items-center z-20 ">
+            <nav class="mb-4 flex flex-row gap-4 h-14 fixed justify-between top-0 shadow-2xl bg-slate-200 w-screen items-center z-20 ">
                 <div class=" flex flex-row h-full lg:w-32 justify-center items-center">
                     <div>
                         <language-button></language-button>

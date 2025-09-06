@@ -35,9 +35,9 @@ class AppText extends BaseElement {
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <div class=" flex flex-row justify-center w-full   ">
-                <div class="max-w-screen max-h-screen p-5 text-3xl h-screen  lg:text-3xl leading-11 overflow-y-scroll ">
+                <div class="max-w-screen max-h-screen p-5 text-3xl h-screen  lg:text-3xl leading-11 overflow-y-auto ">
                     <p   class="flex flex-col gap-6 min-h-fit   ">
-                      <span class="mark" id="text"> ${this.getText()} </span> 
+                      <span  id="text"> ${this.getText()} </span> 
                         <span id="bottom-padding" class="h-32 w-10 "></span>
                     </p>
                     </p>
@@ -66,8 +66,7 @@ class AppText extends BaseElement {
         const raw =  bookService.getPageContent(+pageNumber)
 
         if (!raw.includes('\n\n')) {
-
-            return raw
+            return `<mark>${raw}</mark>`
         }
         return raw.split('\n\n').map(t=>`<mark>${t}</mark>`).join('<br/><br/>')
     }
