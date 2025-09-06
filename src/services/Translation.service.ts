@@ -60,6 +60,10 @@ export class TranslationService extends AbstractBaseService {
             type: AppActionType.setLanguage,
             payload: lang
         })
+        if (document) {
+            document.documentElement.lang = lang === AppLanguage.English ? 'en' : 'he'
+            document.body.dir = lang === AppLanguage.English ? 'ltr' : 'rtl'
+        }
 
     }
    get headerTitle() {
