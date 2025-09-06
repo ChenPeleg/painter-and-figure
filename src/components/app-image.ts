@@ -8,7 +8,7 @@ class AppImage extends BaseElement {
 
 
     private getImageUrl(imageNumber: number) {
-        return `/sketch/image${imageNumber}.png`;
+        return `sketch/image${imageNumber}.png`;
     }
 
     renderTemplate() {
