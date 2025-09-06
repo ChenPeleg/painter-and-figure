@@ -14,7 +14,7 @@ class AppBanner extends BaseElement {
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <a href="#/page/1"  >
-                <h1 class="p-1 w-full   px-3   text-purple-950 font-bold text-2xl text-shadow-2xs   select-none">
+                <h1 class="  w-full    line-clamp-1  text-purple-950 font-bold text-2xl text-shadow-2xs   select-none">
                    <i-18 t="${Txt.headerTitle}"> ${this.t.headerTitle}</i-18>
                 </h1>
             </a>
