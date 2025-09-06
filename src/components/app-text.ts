@@ -1,10 +1,13 @@
 import {BaseElement} from '../_core/elements/base-element.ts';
 import {BookService} from '../services/Book.service.ts';
 import {globalStyleSheet} from '../_core/tailwind-style-sheet.ts';
+import type {Subscription} from '../models/Subscription.ts';
+import {TranslationService} from '../services/Translation.service.ts';
 
 
 class AppText extends BaseElement {
-    static color = `rgba(255, 255, 255, 1)`
+    private subscription: Subscription | null = null;
+
     static markClass =      `mark {
   margin: 0 -0.4em;
   padding: 0.1em 0.4em;
@@ -27,6 +30,14 @@ class AppText extends BaseElement {
         const markClassStyleSheet = new CSSStyleSheet();
         markClassStyleSheet.replaceSync(AppText.markClass);
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet, markClassStyleSheet];
+       this.subscription =   this.servicesProvider.getService(TranslationService).subscribe ((_state) =>  {
+              this.update();
+       })
+    }
+    disconnectedCallback() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 
     renderTemplate() {
