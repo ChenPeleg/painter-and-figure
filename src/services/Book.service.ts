@@ -3,6 +3,7 @@ import {AbstractBaseService} from '../_global/provider/AbstractBaseService.ts';
 import {bookContent} from '../content/bookContent.ts';
 import {StoreService} from './Store.service.ts';
 import {AppLanguage} from '../models/Language.ts';
+import {appConfig} from '../configuration/appConfig.ts';
 
 export class BookService extends AbstractBaseService {
    private bookContent = bookContent
@@ -19,6 +20,10 @@ export class BookService extends AbstractBaseService {
         }
 
     }
+    static prefixImageSrcPath = (src: string) => {
+        const srcFolderIfNeeded = appConfig.isDevelopment ? '/' : '/';
+        return `${srcFolderIfNeeded}${src}`;
+    };
     getPageContent(page: number): string {
        const lang = this.servicesResolver.getService(StoreService).store.getState().language;
 

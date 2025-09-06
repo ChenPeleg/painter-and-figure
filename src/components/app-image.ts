@@ -8,13 +8,13 @@ class AppImage extends BaseElement {
 
 
     private getImageUrl(imageNumber: number) {
-        return `/src/assets/sketch/image${imageNumber}.png`;
+        return `/sketch/image${imageNumber}.png`;
     }
 
     renderTemplate() {
         this.shadowRoot!.innerHTML = `
             <div class=" flex flex-row justify-center w-full  ">
-               <img class="max-w-screen max-h-screen" src="/src/assets/sketch/image1.png" alt="image1"/>
+               <img class="max-w-screen max-h-screen" src="/sketch/image1.png" alt="image1"/>
             </div>
         `;
     }
