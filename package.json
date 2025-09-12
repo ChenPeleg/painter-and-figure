@@ -15,7 +15,8 @@
     "build:site": "tsc && vite build --site",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
-    "test": "tsc  "
+    "test": "tsc  ",
+    "test:e2e": "npx playwright test"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
