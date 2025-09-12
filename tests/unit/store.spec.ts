@@ -3,6 +3,7 @@ import {expect, test} from '@playwright/test';
 import {mockServiceProvider} from '../mock/mockServiceProvider';
 import {StoreService} from '../../src/services/Store.service';
 import {AppActionType} from '../../src/store/app-action-type';
+import {AppLanguage} from '../../src/models/Language';
 
 
 
@@ -21,22 +22,17 @@ test.describe('Store Reducer', () => {
         const newState = store.getState()
         expect(newState.count).toBe(initialState.count + 1);
     });
-    //
-    // test('setLanguage updates language', async () => {
-    //
-    // });
-    //
-    // test('clearStorage resets count', async () => {
-    //     const initialState: AppStoreModel = {
-    //         display: DisplayType.Rows,
-    //         count: 5,
-    //         language: AppLanguage.English,
-    //     };
-    //     const newState = appReducer(initialState, {
-    //         type: AppActionType.clearStorage,
-    //         payload: undefined
-    //     });
-    //     expect(newState.count).toBe(0);
-    // });
-});
+    test('setLanguage updates language', async () => {
+        const servicesProvider = mockServiceProvider()
+        const store = servicesProvider.getService(StoreService).store
+        expect(store).toBeDefined()
+        store.dispatch({ type: AppActionType.setLanguage, payload: AppLanguage.English})
+        const newState = store.getState()
+        expect(newState.language ).toBe(AppLanguage.English)
+        store.dispatch({ type: AppActionType.setLanguage, payload: AppLanguage.Hebrew})
+        const newState2 = store.getState()
+        expect(newState2.language ).toBe(AppLanguage.Hebrew)
 
+    });
+
+});
