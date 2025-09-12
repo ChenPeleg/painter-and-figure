@@ -22,9 +22,16 @@ export class TranslationService extends AbstractBaseService {
     constructor(provider: ServicesResolver) {
         super(provider);
         this.subscribers = [];
+       this. init()
 
     }
-    public  translate (key: string ): string {
+    public async init(): Promise<void> {
+        setTimeout(()=>{
+
+        this.updateDocumentLangAttribute(this.appLanguages);
+        },1)
+    }
+    public translate (key: string ): string {
         const lang = this.appLanguages
 
         switch (key) {
@@ -91,10 +98,13 @@ export class TranslationService extends AbstractBaseService {
         })
         this.subscribers.forEach(sub => sub.cb(lang));
         if (document) {
-            document.documentElement.lang = lang === AppLanguage.English ? 'en' : 'he'
-            document.body.dir = lang === AppLanguage.English ? 'ltr' : 'rtl'
+          this.updateDocumentLangAttribute(lang);
         }
 
+    }
+    updateDocumentLangAttribute(lang: AppLanguage) {
+        document.documentElement.lang = lang === AppLanguage.English ? 'en' : 'he'
+        document.body.dir = lang === AppLanguage.English ? 'ltr' : 'rtl'
     }
 
 
