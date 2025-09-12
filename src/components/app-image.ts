@@ -17,7 +17,6 @@ constructor() {
     }
 
     renderTemplate() {
-        console.log('render image', this.getAttribute('page-number'))
         const imageNumber = this.getAttribute('page-number') || 1;
         this.shadowRoot!.innerHTML = `
             <div class=" flex flex-row justify-center w-full  ">
