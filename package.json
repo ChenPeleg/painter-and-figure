@@ -1,5 +1,5 @@
 {
-  "name": "vanilla-components",
+  "name": "painter-and-figure",
   "description": "A collection of web components built with vanilla JavaScript and TypeScript.",
   "private": false,
   "version": "0.7.0",
@@ -11,8 +11,7 @@
   },
   "scripts": {
     "dev": "vite --mode development",
-    "build": "tsc && vite build",
-    "build:site": "tsc && vite build --site",
+    "build": "tsc && vite build --mode production",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
     "test": "tsc  ",
@@ -41,13 +40,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChenPeleg/vanilla-elemetns.git"
+    "url": "git+https://github.com/ChenPeleg/painter-and-figure.git"
   },
   "author": "Chen Peleg",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ChenPeleg/vanilla-elemetns/issues"
+    "url": "https://github.com/ChenPeleg/painter-and-figure/issues"
   },
-  "homepage": "https://chenpeleg.github.io/vanilla-elemetns/",
+  "homepage": "https://chenpeleg.github.io/painter-and-figure/",
   "web-types": "./web-types.json"
 }

@@ -15,6 +15,8 @@ import image11 from '../../public/sketch/image11.jpeg';
 import image12 from '../../public/sketch/image12.jpeg';
 import image13 from '../../public/sketch/image13.jpeg';
 import image14 from '../../public/sketch/image14.jpeg';
+import {appConfig} from '../configuration/appConfig.ts';
+import {EnvironmentType} from '../models/EnvironmentType.ts';
 
 export class ImageService extends AbstractBaseService {
     static allImages: Record<number, string> = {
@@ -34,7 +36,8 @@ export class ImageService extends AbstractBaseService {
         14: image14
     };
     private buildImageUrl(imageNumber: number): string {
-        return  `/sketch/image${imageNumber}.jpeg`;
+        const prefix = appConfig.environment === EnvironmentType.Production ? '' : '/painter-and-figure';
+        return  `${prefix}/sketch/image${imageNumber}.jpeg`;
     }
 
     getImageUrl(imageNumber: number): string {
