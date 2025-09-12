@@ -4,6 +4,7 @@ import type {Subscription} from './models/Subscription.ts';
 import {BookService} from './services/Book.service.ts';
 import {StoreService} from './services/Store.service.ts';
 import {AppLanguage} from './models/Language.ts';
+import {CustomContent} from './models/customContent.ts';
 
 
 class AppPage extends BaseElement {
@@ -39,13 +40,12 @@ class AppPage extends BaseElement {
                 this.update();
             }
         }))
-        const storeService = this.servicesProvider.getService(StoreService);
-        this.storeSubscription = storeService.store.subscribe((newState => {
-            if (newState.language !== this.state.language) {
-                // this.renderTemplate()
-                // this.state.language = newState.language
-            }
-        }))
+
+        const routerState = this.servicesProvider.getService(HashRouterService).getState();
+        this.state.currentPage = routerState.params.page;
+        this.update();
+
+
     }
 
     renderTemplate() {
@@ -62,7 +62,8 @@ class AppPage extends BaseElement {
                     <main class="relative z-0 flex flex-col justify-between h-dvh overflow-hidden max-h-dvh">
                         <div class=" absolute lg:top-0 flex flex-col items-center w-full    ">
                             <div id="nav-bar-space" class="lg:h-14 h-24 w-screen"></div>
-                            <div class="  flex flex-row  max-w-xl ">
+                            <div id="app-text-top-padding" class=" hidden lg:block"></div>
+                            <div id="app-text-wrapper" class="flex flex-row  max-w-xl ">
                                 <app-text page-number="${this.state.currentPage}"></app-text>
                             </div>
                         </div>
@@ -79,7 +80,7 @@ class AppPage extends BaseElement {
     }
 
     update() {
-        // Update navigation attributes
+
         const navElement = this.$<HTMLElement>('app-navigation');
         if (navElement) {
             navElement.setAttribute('current-page', this.state.currentPage?.toString());
@@ -89,6 +90,13 @@ class AppPage extends BaseElement {
 
         this.$<HTMLElement>('app-image').setAttribute('page-number', this.state.currentPage?.toString() || '1');
         this.$<HTMLElement>('app-text').setAttribute('page-number', this.state.currentPage?.toString() || '1');
+        this.customPageUpdates()
+    }
+
+    customPageUpdates() {
+        const bookService = this.servicesProvider.getService(BookService)
+        const customContent = new Set(bookService.getPageCustomType(this.state.currentPage))
+        this.$<HTMLElement>('#app-text-top-padding').style.minHeight  = customContent.has(CustomContent.AboutTheAuthor) ? '50vh' : '0';
     }
 
     disconnectedCallback() {
