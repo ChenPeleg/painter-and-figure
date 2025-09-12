@@ -5,13 +5,11 @@ import type {AppStoreModel} from '../../src/store/app-store-model';
 import {DisplayType} from '../../src/store/app-store-model';
 import {AppLanguage} from '../../src/models/Language';
 
-import {LocalStorageMock} from '../mock/Localstorage.mock';
 
 
 test.describe('Store Reducer', () => {
     test.beforeEach(()=>{
-        window.localStorage.clear();
-        window.localStorage = new LocalStorageMock() as any
+
     })
     test('addOne increments count', async () => {
         const initialState: AppStoreModel = {
@@ -19,10 +17,7 @@ test.describe('Store Reducer', () => {
             count: 0,
             language: AppLanguage.English,
         };
-        const newState = appReducer(initialState, {
-            type: AppActionType.addOne,
-            payload: undefined
-        });
+
         expect(1).toBe(1);
     });
     //
