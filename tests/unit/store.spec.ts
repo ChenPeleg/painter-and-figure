@@ -5,28 +5,31 @@ import type {AppStoreModel} from '../../src/store/app-store-model';
 import {DisplayType} from '../../src/store/app-store-model';
 import {AppLanguage} from '../../src/models/Language';
 import {_ServicesProvider} from '../../src/services/_ServicesProvider';
+import {mockServiceProvider} from '../mock/mockServiceProvider';
 
-
+let servicesProvider: typeof _ServicesProvider ;
 
 test.describe('Store Reducer', () => {
     test.beforeEach(()=>{
 
     })
     test('addOne increments count', async () => {
+        const servicesProvider = mockServiceProvider()
+        const initialState: AppStoreModel = {
+                    display: DisplayType.Rows,
+                    count: 0,
+                    language: AppLanguage.English,
+                };
+                const newState = appReducer(initialState, {
+                    type: AppActionType.setLanguage,
+                    payload: AppLanguage.Hebrew
+                });
+                expect(newState.language).toBe(AppLanguage.Hebrew);
 
     });
     //
     // test('setLanguage updates language', async () => {
-    //     const initialState: AppStoreModel = {
-    //         display: DisplayType.Rows,
-    //         count: 0,
-    //         language: AppLanguage.English,
-    //     };
-    //     const newState = appReducer(initialState, {
-    //         type: AppActionType.setLanguage,
-    //         payload: AppLanguage.Hebrew
-    //     });
-    //     expect(newState.language).toBe(AppLanguage.Hebrew);
+    //
     // });
     //
     // test('clearStorage resets count', async () => {
