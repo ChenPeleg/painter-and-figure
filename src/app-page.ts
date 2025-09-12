@@ -96,7 +96,7 @@ class AppPage extends BaseElement {
     customPageUpdates() {
         const bookService = this.servicesProvider.getService(BookService)
         const customContent = new Set(bookService.getPageCustomType(this.state.currentPage))
-        this.$<HTMLElement>('#app-text-top-padding').style.minHeight  = customContent.has(CustomContent.AboutTheAuthor) ? '10rem' : '0';
+        this.$<HTMLElement>('#app-text-top-padding').style.minHeight  = customContent.has(CustomContent.AboutTheAuthor) ? '50vh' : '0';
     }
 
     disconnectedCallback() {
