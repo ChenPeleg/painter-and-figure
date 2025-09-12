@@ -36,7 +36,7 @@ export class ImageService extends AbstractBaseService {
         14: image14
     };
     private buildImageUrl(imageNumber: number): string {
-        const prefix = appConfig.environment === EnvironmentType.Production ? '' : '/painter-and-figure';
+        const prefix = appConfig.environment === EnvironmentType.Production ? '/painter-and-figure' : '';
         return  `${prefix}/sketch/image${imageNumber}.jpeg`;
     }
 
