@@ -1,12 +1,23 @@
 import {ServicesResolver} from '../_global/provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from '../_global/provider/AbstractBaseService.ts';
+import {LocalStorageMock} from '../../tests/mock/Localstorage.mock.ts';
+import {appConfig} from '../configuration/appConfig.ts';
+import {EnvironmentType} from '../models/EnvironmentType.ts';
 
 export class LocalStorageService extends AbstractBaseService {
     public static readonly STORE_SETTINGS = 'attendance_Store_Settings';
     protected _localStorage: Storage;
     constructor(provider: ServicesResolver) {
         super(provider);
-        this._localStorage = localStorage;
+        this._localStorage = this.setStorageByEnv (appConfig.environment);
+    }
+    setStorageByEnv(environment: EnvironmentType) {
+        switch (environment) {
+            case  EnvironmentType.Test:
+                return new LocalStorageMock() as unknown as Storage;
+            default
+                : return window.localStorage;
+        }
     }
 
     getItem(key: string) {

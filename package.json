@@ -15,11 +15,13 @@
     "build:site": "tsc && vite build --site",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
-    "test": "tsc  "
+    "test": "tsc  ",
+    "test:e2e": "npx playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@tailwindcss/vite": "^4.1.11",
-    "@types/node": "^24.0.7",
+    "@types/node": "^24.3.1",
     "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3",
     "vite": "^7.0.0"
