@@ -24,10 +24,13 @@ export const appReducer: StoreReducer<AppStoreModel, AppAction> = (state: AppSto
                 count: 0
             };
         case AppActionType.setLanguage:
-            return {
+
+            const newState = {
                 ...state,
                 language: action.payload
             }
+            localStorage.setObject(LocalStorageService.STORE_SETTINGS, newState);
+            return newState;
         default:
             return state;
     }

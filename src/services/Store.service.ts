@@ -47,6 +47,7 @@ export class StoreService extends AbstractBaseService {
         if (!stateFromLocalStorage) {
             return null;
         }
+        return  stateFromLocalStorage
 
     }
 
