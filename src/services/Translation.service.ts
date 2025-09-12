@@ -25,7 +25,7 @@ export class TranslationService extends AbstractBaseService {
        this. init()
 
     }
-    public async init(): Promise<void> {
+    public   init()  {
         setTimeout(()=>{
 
         this.updateDocumentLangAttribute(this.appLanguages);
