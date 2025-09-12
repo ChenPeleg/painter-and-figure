@@ -5,8 +5,6 @@ import {StoreService} from '../../src/services/Store.service';
 import {AppActionType} from '../../src/store/app-action-type';
 import {AppLanguage} from '../../src/models/Language';
 
-
-
 test.describe('Store Reducer', () => {
     test.beforeEach(() => {
 
