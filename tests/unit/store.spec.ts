@@ -1,10 +1,4 @@
 import {expect, test} from '@playwright/test';
-import {appReducer} from '../../src/store/app-reducer';
-import {AppActionType} from '../../src/store/app-action-type';
-import type {AppStoreModel} from '../../src/store/app-store-model';
-import {DisplayType} from '../../src/store/app-store-model';
-import {AppLanguage} from '../../src/models/Language';
-
 
 
 test.describe('Store Reducer', () => {
@@ -12,11 +6,7 @@ test.describe('Store Reducer', () => {
 
     })
     test('addOne increments count', async () => {
-        const initialState: AppStoreModel = {
-            display: DisplayType.Rows,
-            count: 0,
-            language: AppLanguage.English,
-        };
+
 
         expect(1).toBe(1);
     });
