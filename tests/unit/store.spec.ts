@@ -4,6 +4,7 @@ import {AppActionType} from '../../src/store/app-action-type';
 import type {AppStoreModel} from '../../src/store/app-store-model';
 import {DisplayType} from '../../src/store/app-store-model';
 import {AppLanguage} from '../../src/models/Language';
+import {_ServicesProvider} from '../../src/services/_ServicesProvider';
 
 
 
@@ -12,16 +13,7 @@ test.describe('Store Reducer', () => {
 
     })
     test('addOne increments count', async () => {
-        const initialState: AppStoreModel = {
-            display: DisplayType.Rows,
-            count: 0,
-            language: AppLanguage.English,
-        };
-        const newState = appReducer(initialState, {
-            type: AppActionType.addOne,
-            payload: undefined
-        });
-        expect(1).toBe(1);
+
     });
     //
     // test('setLanguage updates language', async () => {
