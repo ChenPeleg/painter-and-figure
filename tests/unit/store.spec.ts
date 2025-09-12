@@ -2,6 +2,7 @@ import {expect, test} from '@playwright/test';
 
 import {mockServiceProvider} from '../mock/mockServiceProvider';
 import {StoreService} from '../../src/services/Store.service';
+import {AppActionType} from '../../src/store/app-action-type';
 
 
 
@@ -13,8 +14,12 @@ test.describe('Store Reducer', () => {
         const servicesProvider = mockServiceProvider()
         const store = servicesProvider.getService(StoreService).store
         expect(store).toBeDefined()
-
-
+        const initialState = store.getState()
+         store.dispatch(
+            { type: AppActionType.addOne, payload: undefined }
+        )
+        const newState = store.getState()
+        expect(newState.count).toBe(initialState.count + 1);
     });
     //
     // test('setLanguage updates language', async () => {
