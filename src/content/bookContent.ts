@@ -132,7 +132,9 @@ The painter and the figure stayed together — and they were happy.
         customType: []
     }, {
         pageNumber: 14,
-        hebrewText: [`אפיק פלג בן חמש, אוהב מגדלים, אוריגמי, לכתוב ולקרוא, להתנדנד על החבל. `, `זהו ספרו הראשון של המספר והיוצר הצעיר.
+        hebrewText: [`אפיק פלג בן חמש, אוהב מגדלים, אוריגמי, לכתוב ולקרוא, להתנדנד על החבל. `,
+
+            `זהו ספרו הראשון של המספר והיוצר הצעיר.
 `],
         englishText: [`Afik Peleg, five years old, loves towers, origami, writing and reading, swinging on the rope. `, `This is the first book by the young storyteller and creator.
 `],

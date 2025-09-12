@@ -46,7 +46,7 @@ class AppText extends BaseElement {
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <div class=" flex flex-row justify-center w-full   ">
-                <div class="max-w-screen max-h-dvh p-5 text-3xl h-dvh  lg:text-3xl leading-11 overflow-y-auto ">
+                <div class="max-w-screen max-h-dvh p-5 text-2xl h-dvh  lg:text-3xl leading-11 overflow-y-auto ">
                     <p   class="flex flex-col gap-6 min-h-fit   ">
                       <span  id="text"> ${this.getText()} </span> 
                         <span id="bottom-padding" class="h-32 w-10 "></span>

@@ -62,6 +62,7 @@ class AppPage extends BaseElement {
                     <main class="relative z-0 flex flex-col justify-between h-dvh overflow-hidden max-h-dvh">
                         <div class=" absolute lg:top-0 flex flex-col items-center w-full    ">
                             <div id="nav-bar-space" class="lg:h-14 h-24 w-screen"></div>
+                            <div id="app-text-top-padding" class=" hidden lg:block"></div>
                             <div id="app-text-wrapper" class="flex flex-row  max-w-xl ">
                                 <app-text page-number="${this.state.currentPage}"></app-text>
                             </div>
@@ -95,9 +96,7 @@ class AppPage extends BaseElement {
     customPageUpdates() {
         const bookService = this.servicesProvider.getService(BookService)
         const customContent = new Set(bookService.getPageCustomType(this.state.currentPage))
-        this.$<HTMLElement>('#app-text-wrapper').style.paddingTop = customContent.has(CustomContent.AboutTheAuthor) ? '4rem' : '0';
-
-
+        this.$<HTMLElement>('#app-text-top-padding').style.minHeight  = customContent.has(CustomContent.AboutTheAuthor) ? '10rem' : '0';
     }
 
     disconnectedCallback() {
