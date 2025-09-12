@@ -6,9 +6,7 @@ import {AppActionType} from '../../src/store/app-action-type';
 import {AppLanguage} from '../../src/models/Language';
 
 test.describe('Store Reducer', () => {
-    test.beforeEach(() => {
 
-    })
     test('addOne increments count', async () => {
         const servicesProvider = mockServiceProvider()
         const store = servicesProvider.getService(StoreService).store
