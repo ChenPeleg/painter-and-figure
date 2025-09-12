@@ -1,3 +1,6 @@
+
+
+
 export abstract class Enum {
     protected _value: string | number;
     constructor(value: string | number) {
