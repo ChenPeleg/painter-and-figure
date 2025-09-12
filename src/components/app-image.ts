@@ -17,17 +17,18 @@ constructor() {
     }
 
     renderTemplate() {
+        const imageNumber = this.getAttribute('page-number') || 1;
         this.shadowRoot!.innerHTML = `
             <div class=" flex flex-row justify-center w-full  ">
-               <img class="max-w-screen max-h-dvh" src="/src/assets/sketch/image1.jpeg" alt="image1"/>
+               <img class="max-w-screen max-h-dvh" src=${this.imageService.getImageUrl(+imageNumber)}alt="image1"/>
             </div>
         `;
     }
 
     protected update() {
         const imageNumber = this.getAttribute('page-number') || '1';
-        console.log(imageNumber);
         const img = this.$<HTMLImageElement>('img');
+        console.log('img', img);
         if (img) {
             img.src = this.getImageUrl(+imageNumber);
             img.alt = `image${imageNumber}`;

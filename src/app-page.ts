@@ -42,7 +42,6 @@ class AppPage extends BaseElement {
         }))
 
         const routerState = this.servicesProvider.getService(HashRouterService).getState();
-        console.log(routerState.params);
         this.state.currentPage = routerState.params.page;
         this.update();
 
