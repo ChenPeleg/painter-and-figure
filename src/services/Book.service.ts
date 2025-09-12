@@ -4,14 +4,21 @@ import {bookContent} from '../content/bookContent.ts';
 import {StoreService} from './Store.service.ts';
 import {AppLanguage} from '../models/Language.ts';
 import {appConfig} from '../configuration/appConfig.ts';
+import type {CustomContent} from '../models/customContent.ts';
 
 export class BookService extends AbstractBaseService {
-   private bookContent = bookContent
+    private bookContent = bookContent
 
     constructor(provider: ServicesResolver) {
         super(provider);
 
     }
+
+    static prefixImageSrcPath = (src: string) => {
+        const srcFolderIfNeeded = appConfig.isDevelopment ? '/' : '/';
+        return `${srcFolderIfNeeded}${src}`;
+    };
+
     getFirstAndLastPage(): { first: number, last: number } {
         const pages = this.bookContent.map(p => p.pageNumber || 0).filter(p => p !== undefined).sort((a, b) => a - b);
         return {
@@ -20,20 +27,22 @@ export class BookService extends AbstractBaseService {
         }
 
     }
-    static prefixImageSrcPath = (src: string) => {
-        const srcFolderIfNeeded = appConfig.isDevelopment ? '/' : '/';
-        return `${srcFolderIfNeeded}${src}`;
-    };
+
+    getPageCustomType(page: number): CustomContent[] {
+        const pageData = this.bookContent.find(p => p.pageNumber === Number(page));
+
+        return pageData?.customType || [];
+    }
+
     getPageContent(page: number): string {
-       const lang = this.servicesResolver.getService(StoreService).store.getState().language;
+        const lang = this.servicesResolver.getService(StoreService).store.getState().language;
 
         const pageData = this.bookContent.find(p => p.pageNumber === page);
         if (pageData) {
-            return (lang === AppLanguage.English ?  pageData.englishText : pageData.hebrewText).join('\n\n');
+            return (lang === AppLanguage.English ? pageData.englishText : pageData.hebrewText).join('\n\n');
         }
         throw `No content for page ${page}`;
     }
-
 
 
 }
