@@ -2,7 +2,7 @@
 
 
 export abstract class Enum {
-    protected _value: string | number;
+    public _value: string | number;
     constructor(value: string | number) {
         this._value = value  ;
     }

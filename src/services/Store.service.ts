@@ -5,6 +5,7 @@ import type {AppStoreModel} from '../store/app-store-model.ts';
 import {StoreFactory, type StoreReducer} from '../_global/StoreFactory.ts';
 import type {AppAction} from '../models/AppAction.ts';
 import {appReducer} from '../store/app-reducer.ts';
+import {AppLanguage} from '../models/Language.ts';
 
 
 
@@ -47,6 +48,12 @@ export class StoreService extends AbstractBaseService {
         if (!stateFromLocalStorage) {
             return null;
         }
+        if (stateFromLocalStorage.language && stateFromLocalStorage.language._value === AppLanguage.English.value) {
+          stateFromLocalStorage.language =  AppLanguage.English
+        } else {
+            stateFromLocalStorage.language =  AppLanguage.Hebrew
+        }
+
         return  stateFromLocalStorage
 
     }

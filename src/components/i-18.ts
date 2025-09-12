@@ -33,7 +33,7 @@ class I18 extends BaseElement {
 
     renderTemplate() {
         this.shadowRoot!.innerHTML = `<span id="translated-text">
-<!--             <slot></slot>-->
+ 
             </span>`;
     }
 
@@ -44,6 +44,7 @@ class I18 extends BaseElement {
         }
         const translationService = this.servicesProvider.getService(TranslationService);
         const translatedText = translationService.translate(key);
+        console.log('translated text', translatedText);
         const span = this.$<HTMLSpanElement>('#translated-text');
         if (span) {
             span.textContent = translatedText;

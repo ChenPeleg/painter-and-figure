@@ -29,7 +29,7 @@ class AppPage extends BaseElement {
         this.state.currentPage = first
         this.state.currentPage = this.servicesProvider.getService(HashRouterService).getState().params.page
         this.state.language = this.servicesProvider.getService(StoreService).store.getState().language || this.state.language
-        console.log(this.servicesProvider.getService(StoreService).store.getState().language)
+
     }
 
     connectedCallback() {

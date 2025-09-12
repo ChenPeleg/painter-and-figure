@@ -26,6 +26,7 @@ export class TranslationService extends AbstractBaseService {
     }
     public  translate (key: string ): string {
         const lang = this.appLanguages
+
         switch (key) {
             case Txt.nextPage:
                 return lang === AppLanguage.English ? 'Next' : 'עמוד הבא'
