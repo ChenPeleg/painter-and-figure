@@ -18,7 +18,7 @@ export class ConfigurationService extends AbstractBaseService {
         return this._environment === 'development'
     }
     private getEnvironmentFromEnvVar() {
-        const envVar =  import.meta.env.VITE_MODE_NAME;
+        const envVar =  import.meta?.env?.VITE_MODE_NAME;
 
         switch (envVar) {
             case 'development':

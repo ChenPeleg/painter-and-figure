@@ -15,8 +15,11 @@ export class LocalStorageService extends AbstractBaseService {
         switch (environment) {
             case  EnvironmentType.Test:
                 return new LocalStorageMock() as unknown as Storage;
-            default
-                : return window.localStorage;
+            default                :
+                if (typeof window === 'undefined' || !window?.localStorage) {
+                    return new LocalStorageMock() as unknown as Storage;
+                }
+                return window?.localStorage
         }
     }
 

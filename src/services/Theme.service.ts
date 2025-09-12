@@ -32,7 +32,10 @@ export class ThemeService extends AbstractBaseService {
     }
 
     getSystemTheme() {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? AppColorTheme.Dark : AppColorTheme.Light;
+        if (typeof window  ===  'undefined') {
+            return AppColorTheme.Light;
+        }
+        return window?.matchMedia('(prefers-color-scheme: dark)').matches ? AppColorTheme.Dark : AppColorTheme.Light;
     }
 
     themeChangeHandler(e: MediaQueryListEvent) {
@@ -59,6 +62,9 @@ export class ThemeService extends AbstractBaseService {
 
     protected init() {
         this.initThemChangeSubscriptions();
+        if (typeof window === 'undefined') {
+            return;
+        }
         window && this.applyTheme();
     }
 
@@ -67,6 +73,9 @@ export class ThemeService extends AbstractBaseService {
     }
 
     private initThemChangeSubscriptions() {
+        if (typeof window === 'undefined') {
+            return;
+        }
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', this.themeChangeHandler.bind(this));
 
     }

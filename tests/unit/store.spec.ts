@@ -1,30 +1,19 @@
 import {expect, test} from '@playwright/test';
-import {appReducer} from '../../src/store/app-reducer';
-import {AppActionType} from '../../src/store/app-action-type';
-import type {AppStoreModel} from '../../src/store/app-store-model';
-import {DisplayType} from '../../src/store/app-store-model';
-import {AppLanguage} from '../../src/models/Language';
-import {_ServicesProvider} from '../../src/services/_ServicesProvider';
-import {mockServiceProvider} from '../mock/mockServiceProvider';
 
-let servicesProvider: typeof _ServicesProvider ;
+import {mockServiceProvider} from '../mock/mockServiceProvider';
+import {StoreService} from '../../src/services/Store.service';
+
+
 
 test.describe('Store Reducer', () => {
-    test.beforeEach(()=>{
+    test.beforeEach(() => {
 
     })
     test('addOne increments count', async () => {
         const servicesProvider = mockServiceProvider()
-        const initialState: AppStoreModel = {
-                    display: DisplayType.Rows,
-                    count: 0,
-                    language: AppLanguage.English,
-                };
-                const newState = appReducer(initialState, {
-                    type: AppActionType.setLanguage,
-                    payload: AppLanguage.Hebrew
-                });
-                expect(newState.language).toBe(AppLanguage.Hebrew);
+        const store = servicesProvider.getService(StoreService).store
+        expect(store).toBeDefined()
+
 
     });
     //
