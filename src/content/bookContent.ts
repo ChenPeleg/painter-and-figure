@@ -18,7 +18,7 @@ export const bookContent: BookContent[] = [{
     hebrewText: [`הוא צייר עץ, ועוד מעט הוא יתחיל לצייר את השמיים. הוא טבל את המכחול בצבע הכחול שעל הפלטה,
 והתחיל לצייר את השמיים.`],
     englishText: [`He painted a tree, and so
-        customType: []on he would start painting the sky. He dipped the brush in the blue paint on the palette,
+         on he would start painting the sky. He dipped the brush in the blue paint on the palette,
 and began to paint the sky.`],
     customType: []
 }, {
