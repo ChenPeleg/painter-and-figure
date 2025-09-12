@@ -42,7 +42,7 @@ class AppPage extends BaseElement {
         }))
 
         const routerState = this.servicesProvider.getService(HashRouterService).getState();
-        console.log(routerState);
+        console.log(routerState.params);
         this.state.currentPage = routerState.params.page;
         this.update();
 
@@ -80,6 +80,7 @@ class AppPage extends BaseElement {
     }
 
     update() {
+
         const navElement = this.$<HTMLElement>('app-navigation');
         if (navElement) {
             navElement.setAttribute('current-page', this.state.currentPage?.toString());

@@ -26,6 +26,7 @@ constructor() {
 
     protected update() {
         const imageNumber = this.getAttribute('page-number') || '1';
+        console.log(imageNumber);
         const img = this.$<HTMLImageElement>('img');
         if (img) {
             img.src = this.getImageUrl(+imageNumber);
