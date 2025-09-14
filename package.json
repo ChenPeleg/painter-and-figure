@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "vite --mode development",
     "build": "tsc && vite build --mode production",
+    "test-story" : "vite build --mode test-story && vite preview --port 4173",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
     "test": "tsc  ",
