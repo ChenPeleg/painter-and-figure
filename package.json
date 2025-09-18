@@ -16,7 +16,8 @@
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
     "test": "tsc  ",
-    "test:e2e": "npx playwright test"
+    "test:e2e": "npx playwright test",
+    "e2e:ui" : "npm run test:e2e -- --ui"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
