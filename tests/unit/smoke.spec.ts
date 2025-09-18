@@ -15,10 +15,7 @@ test.describe('Html smoke test', () => {
         expect(title).toBe('Test Application');
     })
     test('Loading Html and setting inner html', async ({page}) => {
-        const __dirname =  resolve();
-        const htmlPath = resolve(__dirname, 'tests/html/index.html');
-        const html =  readFileSync(htmlPath, 'utf-8');
-        await page.setContent(html);
+        await page.goto('/')
         await setPageHtml (page, HtmlSnippetsMock.homePage);
         const header = await page.getByRole('heading').innerText();
         expect(header).toBe('Painter & Figure');
