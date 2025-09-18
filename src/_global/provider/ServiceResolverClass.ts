@@ -64,6 +64,10 @@ export class ServicesResolver {
         return this._servicesMap.get(service) as InstanceType<T>;
     }
 
+    public $$DevOverrideService(services: Array<ServiceInjectionMethod>) {
+        this.addServices(services);
+    }
+
     private addServices(services: Array<ServiceInjectionMethod>) {
         services.forEach((service) => {
             if ('useClass' in service) {

@@ -8,11 +8,26 @@ export type RouterState = {
     route: RouteObject | null; params: any
 }
 
+const mockWindow = {
+    addEventListener : (_: string, __: () => void) => {
+
+    },
+    location: {
+        hash: '',
+        pathname: '/'
+    },
+    history: {
+        pushState: (_: any, __: string, path: string) => {
+            mockWindow.location.pathname = path;
+        }
+    }
+}
 
 export class Router {
     private routes: Map<string, RouteObject>;
     private currentPath: string;
     private readonly isHashRouter: boolean;
+    private window = typeof window !== 'undefined' ? window : mockWindow;
 
     constructor({
                     routes,
@@ -31,11 +46,14 @@ export class Router {
         }
         this.currentPath = '';
         this.isHashRouter = isHashRouter;
+        if (!this.window) {
+            return
+        }
 
         if (this.isHashRouter) {
-            window.addEventListener('hashchange', this.handleRouteChange.bind(this));
+            this.window.addEventListener('hashchange', this.handleRouteChange.bind(this));
         } else {
-            window.addEventListener('popstate', this.handleRouteChange.bind(this));
+            this.window.addEventListener('popstate', this.handleRouteChange.bind(this));
         }
 
     }
@@ -65,10 +83,15 @@ export class Router {
 
     public navigate(path: string): void {
         if (this.isHashRouter) {
-            window.location.hash = path;
+            if (this.window) {
+                this.window.location.hash = path;
+            }
             this.handleRouteChange();
         } else {
-            window.history.pushState(null, '', path);
+            if (this.window) {
+
+                this.window.history.pushState(null, '', path);
+            }
             this.handleRouteChange();
         }
     }
@@ -78,7 +101,7 @@ export class Router {
     }
 
     private handleRouteChange(): void {
-        this.currentPath = this.isHashRouter ? window.location.hash.slice(1) || '/' : window.location.pathname || '/';
+        this.currentPath = this.isHashRouter ? this.window.location.hash.slice(1) || '/' : window.location.pathname || '/';
 
         let match = this.findMatchingRoute(this.currentPath);
 
