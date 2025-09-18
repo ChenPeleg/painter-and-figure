@@ -15,8 +15,9 @@
     "test-story" : "vite build --mode test-story && vite preview --port 4173",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
-    "test": "tsc  ",
-    "test:e2e": "npx playwright test",
+    "test": "tsc",
+    "e2e": "npx playwright test",
+    "e2e:test-server": "vite --mode test --config tests/vite.testing-config.ts",
     "e2e:ui" : "npm run test:e2e -- --ui"
   },
   "devDependencies": {

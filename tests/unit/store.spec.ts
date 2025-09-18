@@ -28,7 +28,6 @@ test.describe('Store Reducer', () => {
         store.dispatch({ type: AppActionType.setLanguage, payload: AppLanguage.Hebrew})
         const newState2 = store.getState()
         expect(newState2.language ).toBe(AppLanguage.Hebrew)
-
     });
 
 });
