@@ -3,45 +3,29 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path';
 import fs from 'node:fs/promises';
 
-export default defineConfig(({ command,
-                                 mode
-                             } )=>{
-    const defaultConfig = {   server : {
-            port : 4000,
-            open : './html/index.html',
+export default defineConfig(() => {
+    const defaultConfig = {
+        server: {
+            port: 4000,
         },
 
         base: '',
         publicDir: path.resolve(process.cwd(), 'public'),
-        plugins: [tailwindcss(),
-            {
-                name: 'configure-response-headers',
-                apply: "serve", //   docs:
-                //   https://vitejs.dev/guide/api-plugin.html#conditional-application
-                async transformIndexHtml(html) {
+        plugins: [tailwindcss(), {
+            name: 'configure-response-headers',
+            apply: 'serve', //   docs:
+            //   https://vitejs.dev/guide/api-plugin.html#conditional-application
+            async transformIndexHtml() {
+                const content = await fs.readFile('./tests/html/index.html', 'utf8');
+                return {
+                    html: content,
+                    tags: []
+                };
 
 
-                    switch (mode) {
-                        case "contrast_dev": {
-                            const content = await fs.readFile(
-                                "./index-contrast.html",
-                                "utf8"
-                            );
-                            return { html: content, [] };
-                        }
-                        case "uncontrast_dev": {
-                            const content = await fs.readFile(
-                                "./index-uncontrast.html",
-                                "utf8"
-                            );
-                            return { html: content, [] };
-                        }
-                    }
+            },
 
-                    return html;
-                },
-
-            }
+        }
 
         ],
         define: {
@@ -49,7 +33,7 @@ export default defineConfig(({ command,
             'import.meta.env.VITE_APP_VERSION': JSON.stringify(process.env.npm_package_version),
         },
     }
-    return defaultConfig
+    return defaultConfig as any
 
 
 });
