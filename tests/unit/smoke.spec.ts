@@ -2,7 +2,7 @@ import {expect, test} from '@playwright/test';
 import  {readFileSync} from 'fs';
 import {resolve} from 'path';
 import {HtmlSnippetsMock} from '../mock/HtmlSnippets.mock';
-import {sleep} from '../tools/sleep';
+import {setPageHtml} from '../tools/setPageHtml';
 
 test.describe('Html smoke test', () => {
 
@@ -19,14 +19,8 @@ test.describe('Html smoke test', () => {
         const htmlPath = resolve(__dirname, 'tests/html/index.html');
         const html =  readFileSync(htmlPath, 'utf-8');
         await page.setContent(html);
-
-        await page.getByTestId('harness-root-div').evaluate((el, html) => {
-            el.innerHTML = html;
-        }, HtmlSnippetsMock.homePage);
-
-        await sleep(5000);
-
-        const title = await page.title();
-        expect(title).toBe('Test Application');
+        await setPageHtml (page, HtmlSnippetsMock.homePage);
+        const header = await page.getByRole('heading').innerText();
+        expect(header).toBe('Painter & Figure');
     })
 })

@@ -2,11 +2,12 @@ import {defineConfig} from 'vite';
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path';
 import fs from 'node:fs/promises';
+import {testConstants} from './tools/testConstants';
 
 export default defineConfig(() => {
     const defaultConfig = {
         server: {
-            port: 4000,
+            port: testConstants.port,
         },
 
         base: '',

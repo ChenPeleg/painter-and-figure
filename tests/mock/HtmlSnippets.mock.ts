@@ -5,7 +5,7 @@ export  const HtmlSnippetsMock = {
       <h1 class="text-3xl font-bold text-indigo-700">Painter & Figure</h1>
     </header>
     <main class="flex flex-col items-center mt-12">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Welcome to Your Creative Space</h2>
+      <p class="text-2xl font-semibold text-gray-800 mb-4">Welcome to Your Creative Space</p>
       <p class="text-gray-600 mb-8 max-w-xl text-center">
         Discover, sketch, and paint with inspiration. Explore our gallery and start your artistic journey today.
       </p>
