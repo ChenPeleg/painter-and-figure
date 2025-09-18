@@ -29,8 +29,7 @@ const getApplicationConfig = (envName: EnvironmentType): AppConfiguration => {
  */
 
 
-console.log(import.meta.env.VITE_MODE_NAME)
-export const appConfig = getApplicationConfig(  import.meta?.env?.VITE_MODE_NAME)
+export const appConfig = getApplicationConfig(  import.meta.env && import.meta.env.VITE_MODE_NAME)
 
 /**
  * -------------------------------------------------------------
