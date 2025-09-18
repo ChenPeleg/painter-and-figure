@@ -18,7 +18,7 @@
     "test": "tsc",
     "e2e": "npx playwright test",
     "e2e:test-server": "vite --mode test --config tests/vite.testing-config.ts",
-    "e2e:ui" : "npm run test:e2e -- --ui"
+    "e2e:ui" : "npm run e2e -- --ui"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
