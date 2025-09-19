@@ -15,10 +15,8 @@ test.describe('Snapshot', () => {
 
             await page.getByRole('heading', {name: 'הצייר והדמות'}).waitFor();
             await page.screenshot({
-                path: 'tests/snapshot/images/hebrew-full-page.jpeg',
                 fullPage: true,
                 quality: 40,
-                type: 'jpeg'
             })
 
             await expect(page).toHaveScreenshot('./__snapshots__/hebrew-full-page.jpeg',
