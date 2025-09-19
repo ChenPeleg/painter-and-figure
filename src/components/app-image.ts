@@ -20,7 +20,7 @@ constructor() {
         const imageNumber = this.getAttribute('page-number') || 1;
         this.shadowRoot!.innerHTML = `
             <div class=" flex flex-row justify-center w-full  ">
-               <img class="max-w-screen max-h-dvh" src="${this.imageService.getImageUrl(+imageNumber)}" alt="image1"/>
+               <img class="max-w-screen max-h-dvh" src="${this.imageService.getImageUrl(+imageNumber)}" alt="image${imageNumber}"/>
             </div>
         `;
     }
