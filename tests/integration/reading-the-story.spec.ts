@@ -36,13 +36,38 @@ test.describe('Integration Tests', () => {
 
 
         await expect(page.getByText(`2/${numberOfPages}`).filter({visible: true})).toBeVisible();
-        await expect(page.getByRole('img' )).toHaveAttribute('alt', 'image1');
+        await expect(page.getByRole('img' )).toHaveAttribute('alt', 'image2');
         await expect(page.getByText(secondPage.hebrewText[0], {exact: false})).toBeVisible();
         await page.getByRole('link', {name: 'עמוד הבא'}).click();
         await expect(page.getByText(`3/${numberOfPages}`).filter({visible: true})).toBeVisible();
-        await expect(page.getByRole('img' )).toHaveAttribute('alt', 'image1');
+        await expect(page.getByRole('img' )).toHaveAttribute('alt', 'image3');
         await expect(page.getByText(thirdPage.hebrewText[0], {exact: false})).toBeVisible();
 
+    })
+
+    test('User can return to previous page', async ({page}) => {
+        await page.goto('/')
+        await setPageHtml(page, //language=HTML
+            `
+                <app-root></app-root>`);
+        await page.goto('/#/page/3')
+        await page.getByText('עב').filter({visible: true}).click();
+
+        await expect(page.getByText(`3/${numberOfPages}`).filter({visible: true})).toBeVisible();
+        await expect(page.getByText(thirdPage.hebrewText[0], {exact: false})).toBeVisible();
+        await expect(page.getByRole('img')).toHaveAttribute('alt', 'image3');
+
+        await page.getByRole('link', {name: 'עמוד קודם'}).click();
+
+        await expect(page.getByText(`2/${numberOfPages}`).filter({visible: true})).toBeVisible();
+        await expect(page.getByText(secondPage.hebrewText[0], {exact: false})).toBeVisible();
+        await expect(page.getByRole('img')).toHaveAttribute('alt', 'image2');
+
+        await page.getByRole('link', {name: 'עמוד קודם'}).click();
+
+        await expect(page.getByText(`1/${numberOfPages}`).filter({visible: true})).toBeVisible();
+        await expect(page.getByText(firstPage.hebrewText[1], {exact: false})).toBeVisible();
+        await expect(page.getByRole('img')).toHaveAttribute('alt', 'image1');
     })
     })
 })
