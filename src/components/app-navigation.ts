@@ -54,7 +54,7 @@ class AppNavigation extends BaseElement {
         const pages = this.calculatePages();
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <nav class="mb-4 flex flex-col  lg:grid lg:grid-cols-3 gap-2 lg:h-14 h-24 fixed  top-0 shadow-2xl  ${AppStyles.surfaceHigh} w-screen items-center z-20 px-2 lg:px-6">
+            <nav data-testid="app-navigation" class="mb-4 flex flex-col  lg:grid lg:grid-cols-3 gap-2 lg:h-14 h-24 fixed  top-0 shadow-2xl  ${AppStyles.surfaceHigh} w-screen items-center z-20 px-2 lg:px-6">
 
 
                 <div class="  flex flex-row lg:h-full h-10 justify-center items-center  ">
