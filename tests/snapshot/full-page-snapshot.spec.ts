@@ -14,13 +14,10 @@ test.describe('Snapshot', () => {
             await page.getByText('עב').filter({visible: true}).click();
 
             await page.getByRole('heading', {name: 'הצייר והדמות'}).waitFor();
-            await page.screenshot({
-                fullPage: true,
-                quality: 40,
-            })
 
-            await expect(page).toHaveScreenshot('./__snapshots__/hebrew-full-page.jpeg',
-                { fullPage: true , maxDiffPixels : 100}
+
+            await expect(page).toHaveScreenshot('fullPage',
+                { fullPage: true   }
             );
         })
 })
