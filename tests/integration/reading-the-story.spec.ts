@@ -31,12 +31,16 @@ test.describe('Integration Tests', () => {
 
         await expect(page.getByText(`1/${numberOfPages}`).filter({visible: true})).toBeVisible();
         await expect(page.getByText(firstPage.hebrewText[1], {exact: false})).toBeVisible();
+        await expect(page.getByRole('img' )).toHaveAttribute('alt', 'image1');
         await page.getByRole('link', {name: 'עמוד הבא'}).click();
 
+
         await expect(page.getByText(`2/${numberOfPages}`).filter({visible: true})).toBeVisible();
+        await expect(page.getByRole('img' )).toHaveAttribute('alt', 'image1');
         await expect(page.getByText(secondPage.hebrewText[0], {exact: false})).toBeVisible();
         await page.getByRole('link', {name: 'עמוד הבא'}).click();
         await expect(page.getByText(`3/${numberOfPages}`).filter({visible: true})).toBeVisible();
+        await expect(page.getByRole('img' )).toHaveAttribute('alt', 'image1');
         await expect(page.getByText(thirdPage.hebrewText[0], {exact: false})).toBeVisible();
 
     })
