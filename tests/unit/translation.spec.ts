@@ -14,11 +14,12 @@ test.describe('Translation Spec', () => {
                     </language-button>
                     <i-18 t="previousPage"></i-18>
                 </div`);
-        const button = page.getByTestId('language-button');
-        await expect(button).toBeVisible()
-        await page.getByText('en').first().click();
+        const component = page.getByTestId('language-button');
+        await expect(component).toBeVisible()
+        await page.getByText('en').filter({visible : true}).click();
         await expect(page.getByText('Previous')).toBeVisible()
-        await page.getByText('en').first().click();
+        await page.getByText('עב').filter({visible : true}).click();
+        await expect(page.getByText('עמוד קודם')).toBeVisible()
 
     })
 
