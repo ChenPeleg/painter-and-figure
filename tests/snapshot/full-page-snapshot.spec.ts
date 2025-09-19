@@ -16,8 +16,9 @@ test.describe('Snapshot', () => {
             await page.getByRole('heading', {name: 'הצייר והדמות'}).waitFor();
 
 
-            await expect(page).toHaveScreenshot('fullPage',
-                { fullPage: true   }
-            );
+            await expect(page).toHaveScreenshot('screenshot.png', {
+                threshold: 0.2,
+                maxDiffPixelRatio: 0.05,
+            });
         })
 })

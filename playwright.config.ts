@@ -65,13 +65,7 @@ export default defineConfig({
     // },
   ],
     globalTimeout : 30 * 1000,
-    expect: {
-        toHaveScreenshot: {
-            maxDiffPixelRatio: 0.05,
-            threshold: 0.2,
-            quality: 40, // Only applies to stored reference images when using JPEG format
-        }
-    },
+ 
 
   /* Run your local dev server before starting the tests */
   webServer:[ {
