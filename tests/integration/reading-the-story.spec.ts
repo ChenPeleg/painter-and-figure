@@ -9,7 +9,7 @@ const secondPage = bookContent.find(p => p.pageNumber === 2) as BookContent;
 const thirdPage = bookContent.find(p => p.pageNumber ===3) as BookContent;
 
 test.describe('Integration Tests', () => {
-
+    test.describe('Hebrew', () => {
     test('User can see the header in Hebrew', async ({page}) => {
         await page.goto('/')
         await setPageHtml(page, //language=HTML
@@ -24,19 +24,21 @@ test.describe('Integration Tests', () => {
     test('User can read the story in Hebrew', async ({page}) => {
         await page.goto('/')
         await setPageHtml(page, //language=HTML
-            `<app-root></app-root>`);
+            `
+                <app-root></app-root>`);
         await page.goto('/#/page/1')
-        await page.getByText('עב').filter({visible : true}).click();
-        const pageNumberOutOf =    page.getByText( `1/${numberOfPages}`).filter({visible : true}) ;
-        await expect(pageNumberOutOf).toBeVisible();
-        await expect(  page.getByText(firstPage.hebrewText[1], {exact : false} ) ).toBeVisible();
-        await page.getByRole('button', {name: 'עמוד הבא'}).click();
-        await expect(pageNumberOutOf).toHaveText(`2/${numberOfPages}`);
-        await expect(  page.getByText(secondPage.hebrewText[0], {exact : false} ) ).toBeVisible();
-        await page.getByRole('button', {name: 'עמוד הבא'}).click();
-        await expect(pageNumberOutOf).toHaveText(`3/${numberOfPages}`);
-        await expect(  page.getByText(thirdPage.hebrewText[0], {exact : false} ) ).toBeVisible();
+        await page.getByText('עב').filter({visible: true}).click();
 
+        await expect(page.getByText(`1/${numberOfPages}`).filter({visible: true})).toBeVisible();
+        await expect(page.getByText(firstPage.hebrewText[1], {exact: false})).toBeVisible();
+        await page.getByRole('link', {name: 'עמוד הבא'}).click();
 
+        await expect(page.getByText(`2/${numberOfPages}`).filter({visible: true})).toBeVisible();
+        await expect(page.getByText(secondPage.hebrewText[0], {exact: false})).toBeVisible();
+        await page.getByRole('link', {name: 'עמוד הבא'}).click();
+        await expect(page.getByText(`3/${numberOfPages}`).filter({visible: true})).toBeVisible();
+        await expect(page.getByText(thirdPage.hebrewText[0], {exact: false})).toBeVisible();
+
+    })
     })
 })
