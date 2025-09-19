@@ -97,7 +97,7 @@ test.describe('Integration Tests', () => {
                 `<app-root></app-root>`);
             await page.goto('/#/page/1')
             await page.getByText('en').filter({visible : true}).click();
-            const header =  page.getByRole('heading' , { name : 'Painter and Figure'  });
+            const header =  page.getByRole('heading' , { name : 'Painter And Figure - By Afik Peleg'  });
             await expect(header).toBeVisible();
             const pageNumberOutOf =    page.getByText( `1/${numberOfPages}`).filter({visible : true}) ;
             await expect(pageNumberOutOf).toBeVisible();
@@ -161,7 +161,7 @@ test.describe('Integration Tests', () => {
             await expect(page.getByText(`5/${numberOfPages}`).filter({visible: true})).toBeVisible();
             await expect(page.getByRole('img')).toHaveAttribute('alt', 'image5');
 
-            const header = page.getByRole('heading', { name: 'Painter and Figure' });
+            const header = page.getByRole('heading', { name: 'Painter And Figure - By Afik Peleg' });
             await header.click();
 
             await expect(page.getByText(`1/${numberOfPages}`).filter({visible: true})).toBeVisible();
