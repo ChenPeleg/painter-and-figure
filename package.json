@@ -12,13 +12,14 @@
   "scripts": {
     "dev": "vite --mode development",
     "build": "tsc && vite build --mode production",
-    "test-story" : "vite build --mode test-story && vite preview --port 4173",
+    "test-story": "vite build --mode test-story && vite preview --port 4173",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
     "test": "tsc",
-    "e2e": "npx playwright test",
+    "e2e": "set NODE_ENV=productionb && npx playwright test",
     "e2e:test-server": "vite --mode test --config tests/vite.testing-config.ts",
-    "e2e:ui" : "npm run e2e -- --ui"
+    "e2e:quick" : "npm run e2e -- --project=chromium",
+    "e2e:ui": "npm run e2e -- --ui"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
