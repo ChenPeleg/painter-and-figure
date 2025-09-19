@@ -69,5 +69,24 @@ test.describe('Integration Tests', () => {
         await expect(page.getByText(firstPage.hebrewText[1], {exact: false})).toBeVisible();
         await expect(page.getByRole('img')).toHaveAttribute('alt', 'image1');
     })
+
+    test('User can return to first page by clicking header', async ({page}) => {
+        await page.goto('/')
+        await setPageHtml(page, //language=HTML
+            `
+                <app-root></app-root>`);
+        await page.goto('/#/page/5')
+        await page.getByText('עב').filter({visible: true}).click();
+
+        await expect(page.getByText(`5/${numberOfPages}`).filter({visible: true})).toBeVisible();
+        await expect(page.getByRole('img')).toHaveAttribute('alt', 'image5');
+
+        const header = page.getByRole('heading', { name: 'הצייר והדמות' });
+        await header.click();
+
+        await expect(page.getByText(`1/${numberOfPages}`).filter({visible: true})).toBeVisible();
+        await expect(page.getByText(firstPage.hebrewText[1], {exact: false})).toBeVisible();
+        await expect(page.getByRole('img')).toHaveAttribute('alt', 'image1');
+    })
     })
 })
