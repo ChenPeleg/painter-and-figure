@@ -34,7 +34,6 @@ test.describe('Navigation bar', () => {
         const component = page.getByTestId('app-navigation');
         await expect(component).toBeVisible();
 
-        // Should show 1/14 by default
         await expect(page.getByText('1/14')).toBeVisible();
     })
 
@@ -51,7 +50,6 @@ test.describe('Navigation bar', () => {
         const component = page.getByTestId('app-navigation');
         await expect(component).toBeVisible();
 
-        // Should show 5/20 with custom attributes
         await expect(page.getByText('5/20')).toBeVisible();
     })
 
@@ -68,7 +66,6 @@ test.describe('Navigation bar', () => {
         const component = page.getByTestId('app-navigation');
         await expect(component).toBeVisible();
 
-        // Previous button should be disabled on first page
         const prevButton = page.locator('#previous-page');
         await expect(prevButton).toHaveClass(/pointer-events-none opacity-50/);
         await expect(prevButton.locator('app-button')).toHaveAttribute('disabled');
@@ -87,7 +84,6 @@ test.describe('Navigation bar', () => {
         const component = page.getByTestId('app-navigation');
         await expect(component).toBeVisible();
 
-        // Next button should be disabled on last page
         const nextButton = page.locator('#next-page');
         await expect(nextButton).toHaveClass(/pointer-events-none opacity-50/);
         await expect(nextButton.locator('app-button')).toHaveAttribute('disabled');
@@ -106,7 +102,6 @@ test.describe('Navigation bar', () => {
         const component = page.getByTestId('app-navigation');
         await expect(component).toBeVisible();
 
-        // Both buttons should be enabled on middle pages
         const prevButton = page.locator('#previous-page');
         const nextButton = page.locator('#next-page');
 
@@ -129,7 +124,6 @@ test.describe('Navigation bar', () => {
         const component = page.getByTestId('app-navigation');
         await expect(component).toBeVisible();
 
-        // Check href attributes
         const prevButton = page.locator('#previous-page');
         const nextButton = page.locator('#next-page');
 
@@ -150,16 +144,13 @@ test.describe('Navigation bar', () => {
         const component = page.getByTestId('app-navigation');
         await expect(component).toBeVisible();
 
-        // Initial state
         await expect(page.getByText('3/10')).toBeVisible();
 
-        // Change current page attribute
         await page.evaluate(() => {
             const nav = document.getElementById('nav');
             nav?.setAttribute('current-page', '7');
         });
 
-        // Should update to show new page
         await expect(page.getByText('7/10')).toBeVisible();
     })
 
@@ -176,12 +167,10 @@ test.describe('Navigation bar', () => {
         const component = page.getByTestId('app-navigation');
         await expect(component).toBeVisible();
 
-        // Start with English (should show "Previous" and "Next")
         await page.getByText('en').filter({visible: true}).click();
         await expect(page.getByText('Previous')).toBeVisible();
         await expect(page.getByText('Next')).toBeVisible();
 
-        // Switch to Hebrew
         await page.getByText('עב').filter({visible: true}).click();
         await expect(page.getByText('עמוד קודם')).toBeVisible();
         await expect(page.getByText('עמוד הבא')).toBeVisible();
@@ -200,7 +189,6 @@ test.describe('Navigation bar', () => {
         const component = page.getByTestId('app-navigation');
         await expect(component).toBeVisible();
 
-        // Both buttons should be disabled for single page
         const prevButton = page.locator('#previous-page');
         const nextButton = page.locator('#next-page');
 
@@ -222,7 +210,6 @@ test.describe('Navigation bar', () => {
         const component = page.getByTestId('app-navigation');
         await expect(component).toBeVisible();
 
-        // Check that all required sub-components are present
         await expect(component.locator('app-banner')).toBeVisible();
         await expect(component.locator('language-button')).toBeVisible();
         await expect(component.locator('#previous-page')).toBeVisible();
