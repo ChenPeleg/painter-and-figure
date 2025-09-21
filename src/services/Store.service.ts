@@ -1,7 +1,7 @@
 import {ServicesResolver} from '../_global/provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from '../_global/provider/AbstractBaseService.ts';
 import {LocalStorageService} from './LocalStorage.service.ts';
-import type {AppStoreModel} from '../store/app-store-model.ts';
+import {type AppStoreModel, DisplayType,} from '../store/app-store-model.ts';
 import {StoreFactory, type StoreReducer} from '../_global/StoreFactory.ts';
 import type {AppAction} from '../models/AppAction.ts';
 import {appReducer} from '../store/app-reducer.ts';
@@ -60,7 +60,25 @@ export class StoreService extends AbstractBaseService {
 
 
     private createInitialStoreState() {
-        const initialState: any = {}
+
+        const initialState: AppStoreModel = {
+            language : AppLanguage.English,
+            count : 0,
+            display : DisplayType.Grid
+        }
+        if (navigator && navigator.language) {
+            const locale = new Intl.Locale(navigator.language);
+            switch (locale.language) {
+                case 'en':
+                    initialState.language = AppLanguage.English;
+                    break;
+                case 'he':
+                   initialState.language = AppLanguage.Hebrew;
+
+            }
+        }
+
+
         return initialState;
     }
 
