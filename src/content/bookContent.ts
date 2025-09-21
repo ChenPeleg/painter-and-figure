@@ -17,8 +17,7 @@ export const bookContent: BookContent[] = [{
     pageNumber: 3,
     hebrewText: [`הוא צייר עץ, ועוד מעט הוא יתחיל לצייר את השמיים. הוא טבל את המכחול בצבע הכחול שעל הפלטה,
 והתחיל לצייר את השמיים.`],
-    englishText: [`He painted a tree, and so
-         on he would start painting the sky. He dipped the brush in the blue paint on the palette,
+    englishText: [`He painted a tree, and soon he would start painting the sky. He dipped the brush in the blue paint on the palette,
 and began to paint the sky.`],
     customType: []
 }, {
@@ -86,7 +85,7 @@ But not to the amusement park, but to another place.
 כאילו שהוא האוכל שלה — אז הוא ברח שוב.
 `],
         englishText: [`The painter went to a farm, where he saw a big chicken that wanted to bite him,
-as if he was her food — so he ran away again.
+as if he was food — so he ran away again.
 `],
         customType: []
     }, {
@@ -97,7 +96,7 @@ as if he was her food — so he ran away again.
 `,
 
         ],
-        englishText: [`He moved forward, and only saw a small part of the slide.
+        englishText: [`He continued forward, and only saw a small part of the slide.
 But he didn't have the strength to get there, because it was really far.
 So he got on a bus, to travel to the slide.
 `,
