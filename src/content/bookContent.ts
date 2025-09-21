@@ -11,7 +11,7 @@ export const bookContent: BookContent[] = [{
 }, {
     pageNumber: 2,
     hebrewText: [`בבית בינוני ולא נקי גר צייר שאהב לצייר.`, ``,],
-    englishText: [`In a medium-sized and not very clean house lived a painter who loved to paint.`, ``,],
+    englishText: [`In a medium-sized and not very clean house lived a painter who loved to paint.` ],
     customType: []
 }, {
     pageNumber: 3,
