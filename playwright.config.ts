@@ -65,6 +65,7 @@ export default defineConfig({
     // },
   ],
     globalTimeout : 30 * 1000,
+ 
 
   /* Run your local dev server before starting the tests */
   webServer:[ {

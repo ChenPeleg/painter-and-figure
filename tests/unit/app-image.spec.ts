@@ -12,7 +12,6 @@ test.describe('App Image', () => {
                     <app-image></app-image>
                 </div>
             `);
-
         const img = page.locator('app-image img');
         await expect(img).toBeVisible();
         await expect(img).toHaveAttribute('src', '/sketch/image1.jpeg');
